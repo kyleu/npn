@@ -2,11 +2,13 @@ package socket
 
 import (
 	"encoding/json"
+
+	"github.com/pkg/errors"
+
 	"github.com/kyleu/npn/app/lib/websocket"
 	"github.com/kyleu/npn/app/request/collection"
 	"github.com/kyleu/npn/app/request/transform"
 	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 )
 
 func onTransformRequest(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {

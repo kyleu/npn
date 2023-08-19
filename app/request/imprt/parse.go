@@ -2,13 +2,13 @@ package imprt
 
 import (
 	"encoding/json"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"strings"
 
 	"github.com/ghodss/yaml"
+	"github.com/pkg/errors"
 
 	"github.com/kyleu/npn/app/request"
+	"github.com/kyleu/npn/app/util"
 )
 
 func parse(filename string, contentType string, content []byte) (string, interface{}, error) {

@@ -2,11 +2,12 @@ package call
 
 import (
 	"fmt"
-	"github.com/kyleu/npn/app/util"
 	"net/http"
 	"net/http/httptrace"
 	"strings"
 	"time"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 func call(p *Params) error {

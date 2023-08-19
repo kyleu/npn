@@ -3,11 +3,12 @@ package socket
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kyleu/npn/app/lib/websocket"
-	"github.com/kyleu/npn/app/util"
+
 	"github.com/pkg/errors"
 
 	"github.com/kyleu/npn/app/call"
+	"github.com/kyleu/npn/app/lib/websocket"
+	"github.com/kyleu/npn/app/util"
 )
 
 func handleRequestMessage(s *websocket.Service, c *websocket.Connection, cmd string, param json.RawMessage) error {

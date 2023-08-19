@@ -2,15 +2,16 @@ package call
 
 import (
 	"context"
-	"github.com/google/uuid"
-	"github.com/kyleu/npn/app/request/session"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"net"
 	"net/http"
 	"time"
 
+	"github.com/google/uuid"
+	"github.com/pkg/errors"
+
 	"github.com/kyleu/npn/app/request"
+	"github.com/kyleu/npn/app/request/session"
+	"github.com/kyleu/npn/app/util"
 )
 
 type Service struct {

@@ -2,10 +2,12 @@ package socket
 
 import (
 	"encoding/json"
+
+	"github.com/pkg/errors"
+
 	"github.com/kyleu/npn/app/lib/search"
 	"github.com/kyleu/npn/app/lib/websocket"
 	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 )
 
 func handleSystemMessage(s *websocket.Service, c *websocket.Connection, cmd string, param json.RawMessage) error {

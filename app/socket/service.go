@@ -2,15 +2,15 @@ package socket
 
 import (
 	"encoding/json"
+
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/call"
 	"github.com/kyleu/npn/app/lib/websocket"
+	"github.com/kyleu/npn/app/request"
 	"github.com/kyleu/npn/app/request/collection"
 	"github.com/kyleu/npn/app/request/imprt"
 	"github.com/kyleu/npn/app/request/session"
-	"github.com/pkg/errors"
-
-	"github.com/kyleu/npn/app/request"
-
-	"github.com/kyleu/npn/app/call"
 )
 
 type Dependencies struct {

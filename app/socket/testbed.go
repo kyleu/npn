@@ -3,11 +3,13 @@ package socket
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kyleu/npn/app/lib/websocket"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"strings"
+
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/lib/websocket"
+	"github.com/kyleu/npn/app/util"
 )
 
 type tkv struct {

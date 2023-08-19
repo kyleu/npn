@@ -2,12 +2,13 @@ package socket
 
 import (
 	"encoding/json"
-	"github.com/kyleu/npn/app/lib/websocket"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"strings"
 
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/lib/websocket"
 	"github.com/kyleu/npn/app/request"
+	"github.com/kyleu/npn/app/util"
 )
 
 func addRequestURL(s *websocket.Service, c *websocket.Connection, param json.RawMessage) error {
