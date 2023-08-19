@@ -286,10 +286,3 @@ builds:
       - "6"
       - "7"
     mod_timestamp: "{{ .CommitTimestamp }}"
-
-  - id: "solaris"
-    goos:
-      - "solaris"
-    goarch:
-      - "amd64"
-    mod_timestamp: "{{ .CommitTimestamp }}"
