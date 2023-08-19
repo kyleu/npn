@@ -1,0 +1,138 @@
+// Profile
+.signin-icon {
+  display: block;
+  float: left;
+  margin-top: 2px;
+  margin-right: 6px;
+}
+
+.profile-image {
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin-top: -3px;
+  margin-right: 6px;
+}
+
+.profile-icon {
+  margin: 6px 0 0 6px;
+}
+
+.profile-picture-choice {
+  float: left;
+  height: 64px;
+  width: 64px;
+  margin-right: 16px;
+}
+
+.profile-pic {
+  height: 32px;
+  width: 32px;
+}
+
+.profile-title {
+  padding-top: 6px;
+}
+
+.profile-remove {
+  padding-top: 6px;
+}
+
+.auth-link {
+  margin-top: 8px;
+}
+
+// Swatch
+.vue-swatches__trigger {
+  border: 1px solid #999;
+}
+
+.vue-swatches__fallback__button {
+  color: #000;
+  background-color: #fff;
+}
+
+.theme-section {
+  margin: 12px;
+}
+
+.mockup-container {
+  float: left;
+}
+
+.mockup {
+  position: relative;
+  width: 192px;
+  height: 108px;
+  font-size: 40%;
+  cursor: pointer;
+
+  .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 192px;
+    height: 108px;
+  }
+
+  .nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 192px;
+    height: 16px;
+
+    .txt {
+      padding: 3px;
+    }
+  }
+
+  .menu {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 40px;
+    height: 84px;
+    padding: 4px;
+
+    a {
+      display: block;
+    }
+  }
+
+  .card {
+    position: absolute;
+    top: 24px;
+    left: 56px;
+    width: 128px;
+    height: 44px;
+    padding: 4px !important;
+  }
+
+  .button {
+    position: absolute;
+    top: 28px;
+    left: 102px;
+    padding: 2px 4px;
+    line-height: normal;
+    font-size: 50%;
+  }
+}
+
+.mode-swatch {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #999;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+// Color Picker
+.color-input {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  padding: 0;
+  margin: 0 0 6px;
+  cursor: pointer;
+}

@@ -7,3 +7,5 @@
 /client/node_modules
 /tmp
 /vue/node_modules
+/vue/dist
+/vue/yarn.lock

@@ -22,6 +22,9 @@
     "wasmserver",
     "websocket"
   ],
+  "ignore": [
+    "^vue"
+  ],
   "tags": [
     "kyleu"
   ],

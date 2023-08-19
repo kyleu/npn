@@ -7,4 +7,4 @@ cd %~dp0\..
 
 echo "=== formatting ==="
 @ECHO ON
-gofumpt -w $(find . -type f -name "*.go" | grep -v .html.go | grep -v .sql.go)
+gofumpt -w $(find . -type f -name "*.go" | grep -v \\./vue | grep -v .html.go | grep -v .sql.go)
