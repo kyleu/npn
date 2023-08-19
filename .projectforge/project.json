@@ -100,7 +100,6 @@
     "freeBSD": true,
     "netBSD": true,
     "openBSD": true,
-    "plan9": true,
     "homebrew": true,
     "nfpms": true,
     "bom": true,

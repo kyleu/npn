@@ -272,17 +272,3 @@ builds:
       - "6"
       - "7"
     mod_timestamp: "{{ .CommitTimestamp }}"
-
-  - id: "plan9"
-    goos:
-      - "plan9"
-    goarch:
-      - "386"
-      - "amd64"
-      - "arm"
-      - "arm64"
-    goarm:
-      - "5"
-      - "6"
-      - "7"
-    mod_timestamp: "{{ .CommitTimestamp }}"
