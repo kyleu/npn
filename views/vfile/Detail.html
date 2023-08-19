@@ -1,0 +1,62 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "encoding/base64"
+  "path/filepath"
+  "unicode/utf8"
+
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/lib/filesystem"
+  "github.com/kyleu/npn/app/util"
+) %}
+
+{% func Detail(path []string, b []byte, urlPrefix string, additionalLinks map[string]string, as *app.State, ps *cutil.PageState) %}
+  <div class="right"></div>
+  <h3>
+    {%- if additionalLinks != nil && len(additionalLinks) > 0 -%}
+    <div class="right">
+      {%- for k, v := range additionalLinks -%}
+      <a href="{%s v %}"><button>{%s k %}</button></a>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+    {%- for idx, p := range path -%}/<a href="{%s urlPrefix %}/{%s filepath.Join(path[:idx + 1]...) %}">{%s p %}</a>{%- endfor -%}
+    <em>({%s util.ByteSizeSI(int64(len(b))) %})</em>
+  </h3>
+  <div class="mt">
+    {%- if len(b) > (1024 * 128) -%}
+    <em>File is {%d len(b) %} bytes, which is too large for the file viewer</em>
+    {%- elseif utf8.Valid(b) -%}
+    {%- code out, _ := cutil.FormatFilename(string(b), path[len(path)-1]) -%}
+    {%s= out %}
+    {%- else -%}
+
+    {%- if imgType := filesystem.ImageType(path...); imgType != "" -%}
+    <img src="data:image/{%s imgType %};base64,{%s base64.StdEncoding.EncodeToString(b) %}" />
+    <hr />
+    {%- endif -%}
+
+    {%- code exif, err := filesystem.ExifExtract(b) -%}
+    {%- if err == nil -%}
+    <table>
+      <thead>
+        <tr>
+          <th>EXIF Name</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for k, v := range exif -%}
+        <tr>
+          <td>{%s k %}</td>
+          <td>{%v v %}</td>
+        </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    {%- else -%}
+    <em>File is binary and contains no exif header</em>
+    {%- endif -%}
+    {%- endif -%}
+  </div>
+{% endfunc %}

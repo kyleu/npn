@@ -1,0 +1,43 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/lib/theme"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type List struct {
+  layout.Basic
+  Themes theme.Themes
+} %}
+
+{% func (p *List) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>Add Theme</h3>
+    <div class="mt">
+      <a href="/theme/new" title="add new theme"><button>New Theme</button></a>
+      <a href="/theme/palette/crayola" title="add new theme"><button>Choose from Crayola colors</button></a>
+      <a href="/theme/palette/css" title="add new theme"><button>Choose from CSS colors</button></a>
+      <a href="/theme/palette/wikipedia" title="add new theme"><button>Choose from Wikipedia colors</button></a>
+      <hr />
+      <form action="/theme/color/edit" method="get">
+        <div class="mt">
+          <input class="left mrs" type="color" name="color" value="{%s theme.ThemeDefault.Light.NavBackground %}" />
+          <button type="submit">Custom Color Theme</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Current Themes</h3>
+    <div class="theme-container mt">
+      {%- for _, t := range p.Themes -%}
+      <div class="theme-item">
+        <a href="/theme/{%u t.Key %}">
+          {%= MockupTheme(t, true, "app", 5, ps) %}
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{% endfunc %}

@@ -1,0 +1,295 @@
+# Content managed by Project Forge, see [projectforge.md] for details.
+# http://goreleaser.com
+project_name: npn
+
+archives:
+  - format: zip
+    wrap_in_directory: "false"
+    files:
+      - none*
+
+brews:
+  -
+    repository:
+      owner: "kyleu"
+      name: "homebrew-kyleu"
+    commit_author:
+      name: "Kyle U"
+      email: "npn@kyleu.com"
+    folder: Formula
+    homepage: "https://github.com/kyleu/npn"
+    description: "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app."
+    license: "MIT"
+    skip_upload: "false"
+    install: "bin.install \"npn\""
+
+changelog:
+  use: "github"
+  filters:
+    exclude:
+      - "^V2:"
+
+checksum:
+  name_template: "checksums.txt"
+  extra_files:
+    - glob: "./build/dist/*_notarized.zip"
+    - glob: "./build/dist/*_desktop.dmg"
+    - glob: "./build/dist/*_desktop.zip"
+    - glob: "./build/dist/*_aar.zip"
+    - glob: "./build/dist/*_apk.zip"
+    - glob: "./build/dist/*_framework.zip"
+    - glob: "./build/dist/*_app.zip"
+    # $PF_SECTION_START(checksums)$
+    # $PF_SECTION_END(checksums)$
+
+dockers:
+  -
+    image_templates:
+      - "ghcr.io/kyleu/npn:{{ trimprefix .Tag \"v\" }}"
+      - "ghcr.io/kyleu/npn:latest"
+    dockerfile: ./tools/release/Dockerfile.release
+  -
+    image_templates:
+      - "ghcr.io/kyleu/npn:{{ trimprefix .Tag \"v\" }}-debug"
+      - "ghcr.io/kyleu/npn:latest-debug"
+    dockerfile: ./tools/release/Dockerfile.debug
+
+dist: "build/dist"
+
+nfpms:
+  -
+    vendor: "Kyle U"
+    homepage: "https://github.com/kyleu/npn}"
+    maintainer: "Kyle U <npn@kyleu.com>"
+    description: "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app."
+    license: "MIT"
+    formats:
+      - apk
+      - deb
+      - rpm
+
+release:
+  draft: false
+  header: |
+    ## {{ .Version }} ({{ .Date }})
+    See https://github.com/kyleu/npn for download links and documentation
+    ## Main downloads
+    - [Linux Intel 64 bit](https://github.com/kyleu/npn/releases/download/{{ .Tag }}/npn_{{ .Version }}_linux_amd64.zip)
+    - [MacOS Universal](https://github.com/kyleu/npn/releases/download/{{ .Tag }}/npn_{{ .Version }}_darwin_all.zip)
+    - [Windows Intel 64 bit](https://github.com/kyleu/npn/releases/download/{{ .Tag }}/npn_{{ .Version }}_windows_amd64.zip)
+
+  extra_files:
+    - glob: "./build/dist/*_notarized.zip"
+    - glob: "./build/dist/*.dmg"
+    - glob: "./build/dist/*_desktop.zip"
+    - glob: "./build/dist/*_aar.zip"
+    - glob: "./build/dist/*_apk.zip"
+    - glob: "./build/dist/*_framework.zip"
+    - glob: "./build/dist/*_app.zip"
+    # $PF_SECTION_START(releasefiles)$
+    # $PF_SECTION_END(releasefiles)$
+
+sboms:
+  - artifacts: archive
+
+signs:
+  - artifacts: checksum
+
+snapcrafts:
+  -
+    publish: false
+    summary: "NPN helps you explore and test HTTP services, with a focus on speed and correctness."
+    description: "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app."
+    grade: stable
+    confinement: strict
+    license: "MIT"
+
+snapshot:
+  name_template: "{{ .Tag }}"
+
+source:
+  enabled: true
+  name_template: "{{ .ProjectName }}_{{ .Version }}_source"
+  format: "zip"
+
+universal_binaries:
+- id: "darwin"
+  replace: false
+  name_template: '{{ .ProjectName }}'
+  hooks:
+    # This is a good place to put one-time use scripts
+    post:
+      - "./bin/build/android.sh {{ .Version }}"
+      - "./bin/build/ios.sh {{ .Version }}"
+      - "./bin/build/desktop.release.sh {{ .Version }}"
+      - "./tools/notarize/notarize.sh"
+      # $PF_SECTION_START(extrascripts)$
+      # $PF_SECTION_END(extrascripts)$
+
+builds:
+  - id: "darwin"
+    goos:
+      - darwin
+    goarch:
+      - "amd64"
+      - "arm64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "linux"
+    goos:
+      - "linux"
+    goarch:
+      - "386"
+      - "amd64"
+      - "arm64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "linux-arm"
+    goos:
+      - "linux"
+    goarch:
+      - "arm"
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "linux-mips"
+    goos:
+      - "linux"
+    goarch:
+      - "mips"
+      - "mipsle"
+      - "mips64"
+      - "mips64le"
+    gomips:
+      - "hardfloat"
+      - "softfloat"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "linux-odd"
+    goos:
+      - "linux"
+    goarch:
+      - "loong64"
+      - "ppc64"
+      - "ppc64le"
+      - "riscv64"
+      - "s390x"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "windows"
+    goos:
+      - "windows"
+    goarch:
+      - "amd64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "windows_386"
+    goos:
+      - "windows"
+    goarch:
+      - "386"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "windows-arm"
+    goos:
+      - "windows"
+    goarch:
+      - "arm"
+      - "arm64"
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "js"
+    goos:
+      - "js"
+    goarch:
+      - "wasm"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "aix"
+    goos:
+      - "aix"
+    goarch:
+      - "ppc64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "dragonfly"
+    goos:
+      - "dragonfly"
+    goarch:
+      - "amd64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "illumos"
+    goos:
+      - "illumos"
+    goarch:
+      - "amd64"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "freebsd"
+    goos:
+      - "freebsd"
+    goarch:
+      - "386"
+      - "amd64"
+      - "arm"
+      - "arm64"
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "netbsd"
+    goos:
+      - "netbsd"
+    goarch:
+      - "386"
+      - "amd64"
+      - "arm"
+      - "arm64"
+    goarm:
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "openbsd"
+    goos:
+      - "openbsd"
+    goarch:
+      - "386"
+      - "amd64"
+      - "arm"
+      - "arm64"
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "plan9"
+    goos:
+      - "plan9"
+    goarch:
+      - "386"
+      - "amd64"
+      - "arm"
+      - "arm64"
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: "solaris"
+    goos:
+      - "solaris"
+    goarch:
+      - "amd64"
+    mod_timestamp: "{{ .CommitTimestamp }}"

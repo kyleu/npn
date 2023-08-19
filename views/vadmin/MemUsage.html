@@ -1,0 +1,22 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "runtime"
+
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type MemUsage struct {
+  layout.Basic
+  Mem *runtime.MemStats
+} %}
+
+{% func (p *MemUsage) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>Memory Usage</h3>
+    <em>Better formatting is coming soon</em>
+    {%s= components.JSON(p.Mem) %}
+  </div>
+{% endfunc %}

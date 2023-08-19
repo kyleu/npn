@@ -1,0 +1,315 @@
+/* Content managed by Project Forge, see [projectforge.md] for details. */
+* {
+  box-sizing: inherit;
+}
+
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.margin {
+  margin: var(--padding);
+}
+
+.bt {
+  border-top: var(--border);
+}
+.bt0 {
+  border-top: 0;
+}
+
+.bb {
+  border-bottom: var(--border);
+}
+.bb0 {
+  border-bottom: 0;
+}
+
+.bl {
+  border-left: var(--border);
+}
+.bl0 {
+  border-left: 0;
+}
+
+.br {
+  border-right: var(--border);
+}
+.br0 {
+  border-right: 0;
+}
+
+.mt {
+  margin-top: var(--padding);
+}
+.mts {
+  margin-top: var(--padding-small);
+}
+.mt0 {
+  margin-top: 0;
+}
+.mb {
+  margin-bottom: var(--padding);
+}
+.mbs {
+  margin-bottom: var(--padding-small);
+}
+.mb0 {
+  margin-bottom: 0;
+}
+
+.ml {
+  margin-left: var(--padding);
+}
+.mls {
+  margin-left: var(--padding-small);
+}
+.ml0 {
+  margin-left: 0;
+}
+
+.mr {
+  margin-right: var(--padding);
+}
+.mrs {
+  margin-right: var(--padding-small);
+}
+.mr0 {
+  margin-right: 0;
+}
+
+.pt {
+  padding-top: var(--padding);
+}
+.pts {
+  padding-top: var(--padding-small);
+}
+.pt0 {
+  padding-top: 0;
+}
+
+.pb {
+  padding-bottom: var(--padding);
+}
+.pbs {
+  padding-bottom: var(--padding-small);
+}
+.pb0 {
+  padding-bottom: 0;
+}
+
+.pl {
+  padding-left: var(--padding);
+}
+.pls {
+  padding-left: var(--padding-small);
+}
+.pl0 {
+  padding-left: 0;
+}
+
+.pr {
+  padding-right: var(--padding);
+}
+.prs {
+  padding-right: var(--padding-small);
+}
+.pr0 {
+  padding-right: 0;
+}
+
+.w25pc {
+  width: 25%;
+}
+
+.overflow {
+  overflow: auto;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.success {
+  color: var(--color-success);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.margin {
+  margin: var(--padding);
+}
+
+.break-word {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.two-pane {
+  display: flex;
+}
+.two-pane .l {
+  flex-grow: 1;
+}
+.two-pane .r {
+  padding-left: var(--padding-small);
+}
+
+.pre {
+  font-family: monospace, monospace;
+  white-space: pre;
+}
+
+.prews {
+  white-space: pre;
+}
+
+.expand, .collapse {
+  float: left;
+  margin-top: 2px;
+  margin-right: 4px;
+}
+
+.sort-title {
+  padding-right: 24px;
+}
+
+.sort-icon {
+  display: inline-block;
+  float: right;
+  height: 18px;
+  width: 18px;
+}
+
+.sort-hover .sort-icon {
+  display: none;
+}
+
+.sort-hover:hover .sort-icon {
+  display: block;
+}
+
+.svg-fill {
+  fill: currentColor;
+}
+
+.svg-stroke {
+  stroke: currentColor;
+}
+
+.error-owned {
+  color: green;
+}
+
+.error-location {
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+.icon {
+  float: left;
+  margin-right: 4px;
+  margin-top: 2px;
+}
+
+.os-windows .icon {
+  margin-top: 0;
+}
+
+.os-linux .icon {
+  margin-top: -1px;
+}
+
+.icon-block {
+  margin-right: 4px;
+}
+
+.icon-gallery-icon {
+  text-align: center;
+  margin: var(--padding-small) var(--padding) var(--padding-small) 0;
+  padding: var(--padding-small);
+  border: var(--border);
+}
+.icon-gallery-icon .gallery-svg {
+  color: var(--color-foreground-muted);
+}
+.icon-gallery-icon .gallery-title {
+  font-size: 75%;
+}
+
+.small-text {
+  font-size: 80%;
+}
+
+.color-muted {
+  color: var(--color-foreground-muted);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-basis-0 {
+  flex-basis: 0;
+}
+
+.flex-align-stretch {
+  align-items: stretch;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.toggle label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.toggle .x {
+  display: none;
+}
+
+.toggle input[type=checkbox]:checked ~ label {
+  display: none;
+}
+
+.toggle input[type=checkbox]:checked ~ .x {
+  display: block;
+}

@@ -1,0 +1,32 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "github.com/samber/lo"
+
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/util"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type Routes struct {
+  layout.Basic
+  Routes map[string][]string
+} %}
+
+{% func (p *Routes) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>HTTP Routes</h3>
+    <ul class="mt">
+      {%- for _, k := range util.ArraySorted(lo.Keys(p.Routes)) -%}
+      <li>
+        <strong>{%s k %}</strong>
+        <ul>
+          {%- for _, r := range p.Routes[k] -%}
+          <li><code>{%s r %}</code></li>
+          {%- endfor -%}
+        </ul>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{% endfunc %}

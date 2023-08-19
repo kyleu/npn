@@ -1,0 +1,21 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/util"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type Index struct { layout.Basic } %}
+
+{% func (p *Index) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>{%= components.SVGRefIcon(`app`, ps) %}{%s util.AppName %}</h3>
+    <p>It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app.</p>
+    <p>
+      <a href="/download"><button>Download</button></a>
+      <a href="https://github.com/kyleu/npn"><button>Source Code</button></a>
+    </p>
+  </div>
+{% endfunc %}

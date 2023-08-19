@@ -1,0 +1,31 @@
+# Content managed by Project Forge, see [projectforge.md] for details.
+name: "NPN"
+options:
+  bundleIdPrefix: dev.npn
+targets:
+  NPN:
+    type: application
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources: [app]
+    dependencies:
+      - framework: ../mobile_ios_arm64/npnServer.xcframework
+        embed: false
+      - sdk: libresolv.tbd
+    info:
+      path: Info.plist
+      properties:
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UILaunchStoryboardName: LaunchScreen
+    settings:
+      CODE_SIGN_ENTITLEMENTS: app.entitlements
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.npn
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: "C6S478FYLD"
+        VALIDATE_WORKSPACE: NO
+      configs:
+        Debug:
+          CODE_SIGN_IDENTITY: Apple Development
+        Release:
+          CODE_SIGN_IDENTITY: Apple Development

@@ -1,0 +1,18 @@
+{% import (
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/util"
+  "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type Home struct {
+  layout.Basic
+} %}
+
+{% func (p *Home) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>{%= components.SVGRefIcon(`app`, ps) %}{%s util.AppName %}</h3>
+    <div class="mt">Welcome to {%s util.AppName %}, your new application!</div>
+  </div>
+{% endfunc %}
