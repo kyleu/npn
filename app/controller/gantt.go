@@ -2,14 +2,16 @@ package controller
 
 import (
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
+	"github.com/valyala/fasthttp"
+
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
 	"github.com/kyleu/npn/app/request/queryparam"
 	"github.com/kyleu/npn/app/util"
-	"github.com/valyala/fasthttp"
-	"math"
-	"strconv"
-	"strings"
 )
 
 type ganttSection struct {

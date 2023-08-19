@@ -2,11 +2,13 @@ package controller
 
 import (
 	"fmt"
+
+	"github.com/pkg/errors"
+	"github.com/valyala/fasthttp"
+
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
 	"github.com/kyleu/npn/app/request/imprt"
-	"github.com/pkg/errors"
-	"github.com/valyala/fasthttp"
 )
 
 func ImportUpload(rc *fasthttp.RequestCtx) {
