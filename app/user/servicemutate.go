@@ -2,9 +2,10 @@ package user
 
 import (
 	"context"
-	"github.com/kyleu/npn/app/util"
 
 	"github.com/google/uuid"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 func (s *Service) Create(ctx context.Context, logger util.Logger, models ...*User) error {

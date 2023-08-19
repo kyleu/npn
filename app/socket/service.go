@@ -2,9 +2,6 @@ package socket
 
 import (
 	"encoding/json"
-	"github.com/kyleu/npn/app/request/search"
-	"github.com/kyleu/npn/app/user"
-	"github.com/kyleu/npn/app/util"
 
 	"github.com/pkg/errors"
 
@@ -13,7 +10,10 @@ import (
 	"github.com/kyleu/npn/app/request"
 	"github.com/kyleu/npn/app/request/collection"
 	"github.com/kyleu/npn/app/request/imprt"
+	"github.com/kyleu/npn/app/request/search"
 	"github.com/kyleu/npn/app/request/session"
+	"github.com/kyleu/npn/app/user"
+	"github.com/kyleu/npn/app/util"
 )
 
 type Service struct {

@@ -2,7 +2,9 @@ package user
 
 import (
 	"context"
+
 	"github.com/google/uuid"
+
 	"github.com/kyleu/npn/app/util"
 )
 

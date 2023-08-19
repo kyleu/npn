@@ -2,7 +2,10 @@ package app
 
 import (
 	"context"
+
 	"github.com/kyleu/npn/app/call"
+	"github.com/kyleu/npn/app/lib/scripting"
+	"github.com/kyleu/npn/app/lib/websocket"
 	"github.com/kyleu/npn/app/request"
 	"github.com/kyleu/npn/app/request/collection"
 	"github.com/kyleu/npn/app/request/imprt"
@@ -10,9 +13,6 @@ import (
 	"github.com/kyleu/npn/app/request/session"
 	"github.com/kyleu/npn/app/socket"
 	"github.com/kyleu/npn/app/user"
-
-	"github.com/kyleu/npn/app/lib/scripting"
-	"github.com/kyleu/npn/app/lib/websocket"
 	"github.com/kyleu/npn/app/util"
 )
 
