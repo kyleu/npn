@@ -1,0 +1,21 @@
+{% import (
+  "github.com/kyleu/npn/app"
+  "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/util"
+  "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/layout"
+) %}
+
+{% code type Workspace struct { layout.Basic } %}
+
+{% func (p *Workspace) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>{%= components.SVGRefIcon(`app`, ps) %}{%s util.AppName %}</h3>
+    <em>v{%s as.BuildInfo.Version %}, started {%s util.TimeRelative(&as.Started) %}</em>
+  </div>
+  <link href="/assets/vendor/{%s util.AppKey %}.css" rel="stylesheet">
+  <script src="/assets/vendor/vendor.js"></script>
+  <script src="/assets/vendor/{%s util.AppKey %}.js"></script>
+  <script src="/assets/vendor/editor/editor.js" defer="defer"></script>
+  <script>init(true, true);</script>
+{% endfunc %}

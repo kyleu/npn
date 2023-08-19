@@ -20,6 +20,7 @@ type Services struct {
 	Script *scripting.Service
 	Socket *websocket.Service
 	User   *user.Service
+	NPN    *socket.Service
 	// add your dependencies here
 }
 
@@ -27,7 +28,7 @@ func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services,
 	scr := scripting.NewService(st.Files, "scripts")
 	ws := websocket.NewService(nil, nil, nil)
 
-	multiuser := false
+	multiuser := util.GetEnvBool("npn_multiuser", false)
 	us := user.NewService()
 	ss := session.NewService(multiuser, st.Files, logger)
 	co := collection.NewService(multiuser, st.Files, logger)
@@ -35,9 +36,9 @@ func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services,
 	cl := call.NewService(ss, logger)
 	sr := search.NewService(co, rq, logger)
 	im := imprt.NewService(st.Files, logger)
+	npn := socket.NewService(us, ss, co, rq, cl, sr, im, ws)
 
-	socket.NewService(us, ss, co, rq, cl, sr, im, ws)
-	return &Services{Script: scr, Socket: ws, User: us}, nil
+	return &Services{Script: scr, Socket: ws, User: us, NPN: npn}, nil
 }
 
 func (s *Services) Close(_ context.Context, _ util.Logger) error {

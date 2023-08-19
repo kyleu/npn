@@ -17,6 +17,8 @@ func MenuFor(
 	var ret menu.Items
 	var data any
 	// $PF_SECTION_START(routes_start)$
+	ws := &menu.Item{Key: "workspace", Title: "Workspace", Description: "A work-in-progress", Icon: "star", Route: "/x"}
+	ret = append(ret, ws, menu.Separator)
 	// $PF_SECTION_END(routes_start)$
 	// $PF_SECTION_START(routes_end)$
 	// This is your menu, feel free to customize it

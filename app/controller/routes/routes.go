@@ -30,7 +30,18 @@ func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
 	themeRoutes(r)
 
 	// $PF_SECTION_START(routes)$
-	// Add your custom routes here
+	r.GET("/x", controller.Workspace)
+	r.GET("/a", controller.Workspace)
+	r.GET("/cfg", controller.Workspace)
+	r.GET("/help", controller.Workspace)
+	r.GET("/u", controller.Workspace)
+	r.GET("/s", controller.Workspace)
+	r.GET("/s/{_:*}", controller.Workspace)
+	r.GET("/c", controller.Workspace)
+	r.GET("/c/{_:*}", controller.Workspace)
+	r.GET("/r", controller.Workspace)
+	r.GET("/svg/gantt", controller.Gantt)
+	r.GET("/ws", controller.Socket)
 	// $PF_SECTION_END(routes)$
 
 	r.GET("/admin", clib.Admin)
