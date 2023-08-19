@@ -18,6 +18,7 @@
     "search",
     "themecatalog",
     "upgrade",
+    "user",
     "wasmserver",
     "websocket"
   ],

@@ -1,7 +1,6 @@
 package socket
 
 const (
-	ClientMessageTestbed     = "testbed"
 	ClientMessageSaveProfile = "saveProfile"
 
 	ClientMessageSearch    = "search"

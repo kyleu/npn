@@ -11,7 +11,7 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func onTransformRequest(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onTransformRequest(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &transformIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
@@ -23,22 +23,22 @@ func onTransformRequest(c *websocket.Connection, param json.RawMessage, s *webso
 		return errors.New("can't load request transformer [" + frm.Fmt + "]")
 	}
 
-	sess, err := ctx(s).Session.Load(&c.Profile.UserID, frm.Sess)
+	sess, err := s.Session.Load(&c.Profile.ID, frm.Sess)
 	if err != nil {
 		return errors.Wrap(err, "can't load request transform session ["+frm.Sess+"]")
 	}
 
-	rsp, err := tx.TransformRequest(frm.Proto, sess, s.Logger)
+	rsp, err := tx.TransformRequest(frm.Proto, sess, logger)
 	if err != nil {
 		return errors.Wrap(err, "can't transform request")
 	}
 
 	txr := transformOut{Coll: frm.Coll, Req: frm.Req, Fmt: frm.Fmt, Out: rsp.Out}
-	msg := websocket.NewMessage("request", ServerMessageRequestTransform, txr)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestTransform, txr)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onTransformCollection(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onTransformCollection(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &transformIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
@@ -50,30 +50,28 @@ func onTransformCollection(c *websocket.Connection, param json.RawMessage, s *we
 		return errors.New("can't load collection transformer [" + frm.Fmt + "]")
 	}
 
-	svcs := ctx(s)
-
-	coll, err := svcs.Collection.Load(&c.Profile.UserID, frm.Coll)
+	coll, err := s.Collection.Load(&c.Profile.ID, frm.Coll)
 	if err != nil {
 		return errors.Wrap(err, "can't load collection transform collection ["+frm.Coll+"]")
 	}
 
-	requests, err := svcs.Request.LoadAll(&c.Profile.UserID, frm.Coll)
+	requests, err := s.Request.LoadAll(&c.Profile.ID, frm.Coll)
 	if err != nil {
 		return errors.Wrap(err, "can't load collection transform requests for ["+frm.Coll+"]")
 	}
 
-	sess, err := ctx(s).Session.Load(&c.Profile.UserID, frm.Sess)
+	sess, err := s.Session.Load(&c.Profile.ID, frm.Sess)
 	if err != nil {
 		return errors.Wrap(err, "can't load collection transform session ["+frm.Sess+"]")
 	}
 
 	tc := &collection.FullCollection{Coll: coll, Requests: requests, Sess: sess}
-	rsp, err := tx.TransformCollection(tc, s.Logger)
+	rsp, err := tx.TransformCollection(tc, logger)
 	if err != nil {
 		return errors.Wrap(err, "can't load transform colllection")
 	}
 
 	txr := transformOut{Coll: frm.Coll, Req: frm.Req, Fmt: frm.Fmt, Out: rsp.Out}
-	msg := websocket.NewMessage("collection", ServerMessageCollectionTransform, txr)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "collection", ServerMessageCollectionTransform, txr)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func parse(filename string, contentType string, content []byte) (string, interface{}, error) {
+func parse(filename string, contentType string, content []byte) (string, any, error) {
 	pkey := initialPhaseKey(filename, contentType)
 	p := parsePhase(filename, &phase{Key: pkey, Value: content}, 0)
 	if p == nil {
@@ -58,7 +58,7 @@ func parsePhase(filename string, p *phase, depth int) *phase {
 }
 
 func parseContent(filename string, content []byte) *phase {
-	var obj map[string]interface{}
+	var obj map[string]any
 	err := yaml.Unmarshal(content, &obj)
 	if err == nil {
 		return parseObject(filename, obj, content)
@@ -87,7 +87,7 @@ func parseContent(filename string, content []byte) *phase {
 	return errorPhase(errors.New("unhandled JSON"), string(content))
 }
 
-func parseObject(filename string, obj map[string]interface{}, content []byte) *phase {
+func parseObject(filename string, obj map[string]any, content []byte) *phase {
 	_, pok := obj["prototype"]
 	_, mok := obj["method"]
 	_, dok := obj["domain"]
@@ -110,7 +110,7 @@ func parseObject(filename string, obj map[string]interface{}, content []byte) *p
 
 	infoInt, iok := obj["info"]
 	if iok {
-		info, iok := infoInt.(map[string]interface{})
+		info, iok := infoInt.(map[string]any)
 		if iok {
 			sch, iok := info["schema"]
 			if iok && strings.Contains(sch.(string), "postman") {

@@ -43,7 +43,7 @@ func (s *Service) Join(connID uuid.UUID, ch string, logger util.Logger) (bool, e
 	if !lo.Contains(curr.ConnIDs, connID) {
 		curr.ConnIDs = append(curr.ConnIDs, connID)
 	}
-	return created, s.sendOnlineUpdate(ch, conn.ID, conn.ID, true, logger)
+	return created, s.sendOnlineUpdate(ch, conn.ID, conn.Profile.ID, true, logger)
 }
 
 func (s *Service) Leave(connID uuid.UUID, ch string, logger util.Logger) (bool, error) {
@@ -67,7 +67,7 @@ func (s *Service) Leave(connID uuid.UUID, ch string, logger util.Logger) (bool, 
 	}
 
 	s.channels[ch].ConnIDs = filteredConns
-	return false, s.sendOnlineUpdate(ch, conn.ID, conn.ID, false, logger)
+	return false, s.sendOnlineUpdate(ch, conn.ID, conn.Profile.ID, false, logger)
 }
 
 func (s *Service) GetChannel(ch string) *Channel {

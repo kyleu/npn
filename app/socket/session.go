@@ -13,20 +13,20 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func handleSessionMessage(s *websocket.Service, c *websocket.Connection, cmd string, param json.RawMessage) error {
+func (s *Service) handleSessionMessage(c *websocket.Connection, cmd string, param json.RawMessage, logger util.Logger) error {
 	var err error
 
 	switch cmd {
 	case ClientMessageGetSession:
-		err = onGetSession(c, param, s)
+		err = s.onGetSession(c, param, logger)
 	case ClientMessageAddSession:
-		err = onAddSession(c, param, s)
+		err = s.onAddSession(c, param, logger)
 	case ClientMessageSaveSession:
-		err = onSaveSession(c, param, s)
+		err = s.onSaveSession(c, param, logger)
 	case ClientMessageDeleteSession:
-		err = onDeleteSession(c, param, s)
+		err = s.onDeleteSession(c, param, logger)
 	case ClientMessageTransform:
-		return onTransformSession(c, param, s)
+		return s.onTransformSession(c, param, logger)
 	default:
 		err = errors.New("invalid session command [" + cmd + "]")
 	}
@@ -34,40 +34,38 @@ func handleSessionMessage(s *websocket.Service, c *websocket.Connection, cmd str
 	return err
 }
 
-func sendSessions(s *websocket.Service, c *websocket.Connection) {
-	svcs := ctx(s)
-	sessions, err := svcs.Session.Counts(&c.Profile.UserID)
+func (s *Service) sendSessions(c *websocket.Connection, logger util.Logger) {
+	sessions, err := s.Session.Counts(&c.Profile.ID)
 	if err != nil {
-		s.Logger.Warn(fmt.Sprintf("error retrieving sessions: %+v", err))
+		logger.Warn(fmt.Sprintf("error retrieving sessions: %+v", err))
 	}
-	msg := websocket.NewMessage("session", ServerMessageSessions, sessions)
-	err = s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessions, sessions)
+	err = s.Socket.WriteMessage(c.ID, msg, logger)
 	if err != nil {
-		s.Logger.Warn(fmt.Sprintf("error writing to socket: %+v", err))
+		logger.Warn(fmt.Sprintf("error writing to socket: %+v", err))
 	}
 }
 
-func onGetSession(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onGetSession(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	key, err := util.FromJSONString(param)
 	if err != nil {
 		return errors.Wrap(err, "unable to read session key")
 	}
 
-	svcs := ctx(s)
-	sess, err := svcs.Session.Load(&c.Profile.UserID, key)
+	sess, err := s.Session.Load(&c.Profile.ID, key)
 	if err != nil {
 		return errors.Wrap(err, "unable to load session ["+key+"]")
 	}
 	var msg *websocket.Message
 	if sess == nil {
-		msg = websocket.NewMessage("session", ServerMessageSessionNotFound, key)
+		msg = websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessionNotFound, key)
 	} else {
-		msg = websocket.NewMessage("session", ServerMessageSessionDetail, sess)
+		msg = websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessionDetail, sess)
 	}
-	return s.WriteMessage(c.ID, msg)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onAddSession(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onAddSession(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	name, err := util.FromJSONString(param)
 	if err != nil {
 		return errors.Wrap(err, "unable to parse session name")
@@ -76,73 +74,70 @@ func onAddSession(c *websocket.Connection, param json.RawMessage, s *websocket.S
 		name = "new"
 	}
 	key := util.Slugify(name)
-	svcs := ctx(s)
-	curr, _ := svcs.Session.Load(&c.Profile.UserID, key)
+	curr, _ := s.Session.Load(&c.Profile.ID, key)
 	if curr != nil {
 		key += "-" + strings.ToLower(util.RandomString(4))
 	}
 
 	sess := &session.Session{Key: key, Title: name}
-	err = svcs.Session.Save(&c.Profile.UserID, "", sess)
+	err = s.Session.Save(&c.Profile.ID, "", sess)
 	if err != nil {
 		return errors.Wrap(err, "unable to save new collection with key ["+key+"]")
 	}
 
-	sessCounts, _ := svcs.Session.Counts(&c.Profile.UserID)
+	sessCounts, _ := s.Session.Counts(&c.Profile.ID)
 
 	ret := &addSessionOut{Sessions: sessCounts, Active: sess}
-	msg := websocket.NewMessage("collection", ServerMessageSessionAdded, ret)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "collection", ServerMessageSessionAdded, ret)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onSaveSession(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
-	svc := ctx(s)
+func (s *Service) onSaveSession(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &saveSessionIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load saveSession param")
 	}
 	frm.Sess = frm.Sess.Minify()
-	err = svc.Session.Save(&c.Profile.UserID, frm.Orig, frm.Sess)
+	err = s.Session.Save(&c.Profile.ID, frm.Orig, frm.Sess)
 	if err != nil {
 		return errors.Wrap(err, "can't save session ["+frm.Sess.Key+"]")
 	}
-	msg := websocket.NewMessage("session", ServerMessageSessionDetail, frm.Sess.Normalize(frm.Sess.Key))
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessionDetail, frm.Sess.Normalize(frm.Sess.Key))
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onDeleteSession(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onDeleteSession(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	key, err := util.FromJSONString(param)
 	if err != nil {
 		return errors.Wrap(err, "unable to parse input")
 	}
-	svcs := ctx(s)
-	err = svcs.Session.Delete(&c.Profile.UserID, key)
+	err = s.Session.Delete(&c.Profile.ID, key)
 	if err != nil {
 		return errors.Wrap(err, "unable to delete session with key ["+key+"]")
 	}
 
-	msg := websocket.NewMessage("session", ServerMessageSessionDeleted, key)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessionDeleted, key)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onTransformSession(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onTransformSession(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := ""
 	err := util.FromJSONStrict(param, &frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load session transform param")
 	}
 
-	sess, err := ctx(s).Session.Load(&c.Profile.UserID, frm)
+	sess, err := s.Session.Load(&c.Profile.ID, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load session transform ["+frm+"]")
 	}
 
-	rsp, err := transform.Session(sess, s.Logger)
+	rsp, err := transform.Session(sess, logger)
 	if err != nil {
 		return errors.Wrap(err, "can't load transform session")
 	}
 
-	msg := websocket.NewMessage("session", ServerMessageSessionTransform, rsp)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "session", ServerMessageSessionTransform, rsp)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }

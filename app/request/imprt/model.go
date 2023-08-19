@@ -1,10 +1,10 @@
 package imprt
 
 type Output struct {
-	Filename string      `json:"filename,omitempty"`
-	Type     string      `json:"type,omitempty"`
-	Value    interface{} `json:"value,omitempty"`
-	Error    string      `json:"error,omitempty"`
+	Filename string `json:"filename,omitempty"`
+	Type     string `json:"type,omitempty"`
+	Value    any    `json:"value,omitempty"`
+	Error    string `json:"error,omitempty"`
 }
 
 type Outputs []*Output
@@ -22,11 +22,11 @@ type Config struct {
 
 type phase struct {
 	Key   string
-	Value interface{}
+	Value any
 	Error error
 	Final bool
 }
 
-func errorPhase(err error, x interface{}) *phase {
+func errorPhase(err error, x any) *phase {
 	return &phase{Key: "error", Value: x, Error: err, Final: true}
 }

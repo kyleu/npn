@@ -48,10 +48,12 @@ func LoadPageState(as *app.State, rc *fasthttp.RequestCtx, key string, logger ut
 	isAuthed, _ := user.Check("/", accts)
 	isAdmin, _ := user.Check("/admin", accts)
 
+	u, _ := as.Services.User.Get(ctx, nil, prof.ID, logger)
+
 	return &PageState{
 		Method: string(rc.Method()), URI: rc.Request.URI(), Flashes: flashes, Session: session,
 		OS: os, OSVersion: ua.OSVersion, Browser: browser, BrowserVersion: ua.Version, Platform: platform,
-		Profile: prof, Accounts: accts, Authed: isAuthed, Admin: isAdmin, Params: params,
+		User: u, Profile: prof, Accounts: accts, Authed: isAuthed, Admin: isAdmin, Params: params,
 		Icons: slices.Clone(initialIcons), Started: util.TimeCurrent(), Logger: logger, Context: ctx, Span: span,
 	}
 }
@@ -90,6 +92,16 @@ func loadSession(_ context.Context, _ *app.State, rc *fasthttp.RequestCtx, logge
 		authS, ok := authX.(string)
 		if ok {
 			accts = user.AccountsFromString(authS)
+		}
+	}
+
+	if prof.ID == util.UUIDDefault {
+		prof.ID = util.UUID()
+		session["profile"] = prof
+		err = csession.SaveSession(rc, session, logger)
+		if err != nil {
+			logger.Warnf("unable to save session for user [%s]", prof.ID.String())
+			return nil, nil, prof, nil
 		}
 	}
 

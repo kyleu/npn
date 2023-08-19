@@ -18,5 +18,6 @@ The following modules were used to build this project:
 - [search](./doc/module/search.md)
 - [themecatalog](./doc/module/themecatalog.md)
 - [upgrade](./doc/module/upgrade.md)
+- [user](./doc/module/user.md)
 - [wasmserver](./doc/module/wasmserver.md)
 - [websocket](./doc/module/websocket.md)

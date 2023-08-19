@@ -11,38 +11,37 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func addRequestURL(s *websocket.Service, c *websocket.Connection, param json.RawMessage) error {
+func (s *Service) addRequestURL(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	p := &addURLIn{}
 	err := util.FromJSONStrict(param, p)
 	if err != nil {
 		return errors.Wrap(err, "unable to parse input from URL")
 	}
-	return AddRequestFromURL(s, c, p.Coll, p.URL)
+	return s.AddRequestFromURL(c, p.Coll, p.URL, logger)
 }
 
-func AddRequestFromURL(s *websocket.Service, c *websocket.Connection, coll string, url string) error {
+func (s *Service) AddRequestFromURL(c *websocket.Connection, coll string, url string, logger util.Logger) error {
 	req, err := request.FromString("new", url)
 	if err != nil {
 		return errors.Wrap(err, "unable to parse request from URL ["+url+"]")
 	}
 	req.Key = util.Slugify(req.Prototype.Domain)
 
-	svcs := ctx(s)
-	curr, _ := svcs.Request.Load(&c.Profile.UserID, coll, req.Key)
+	curr, _ := s.Request.Load(&c.Profile.ID, coll, req.Key)
 	if curr != nil {
 		clean(req)
-		curr, _ = svcs.Request.Load(&c.Profile.UserID, coll, req.Key)
+		curr, _ = s.Request.Load(&c.Profile.ID, coll, req.Key)
 		if curr != nil {
 			req.Key += "-" + strings.ToLower(util.RandomString(4))
 		}
 	}
 
-	err = svcs.Request.Save(&c.Profile.UserID, coll, "", req)
+	err = s.Request.Save(&c.Profile.ID, coll, "", req)
 	if err != nil {
 		return errors.Wrap(err, "unable to save request from URL ["+url+"]")
 	}
 
-	x, err := parseCollDetails(s, &c.Profile.UserID, coll)
+	x, err := s.parseCollDetails(&c.Profile.ID, coll)
 	if err != nil {
 		return err
 	}
@@ -51,8 +50,8 @@ func AddRequestFromURL(s *websocket.Service, c *websocket.Connection, coll strin
 		Coll: x,
 		Req:  req,
 	}
-	msg := websocket.NewMessage("request", ServerMessageRequestAdded, out)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestAdded, out)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
 func clean(req *request.Request) {

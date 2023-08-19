@@ -30,7 +30,7 @@ func (x *JSON) TransformRequest(proto *request.Prototype, sess *session.Session,
 }
 
 func (x *JSON) TransformCollection(c *collection.FullCollection, logger util.Logger) (*Result, error) {
-	src := map[string]interface{}{"coll": c.Coll, "requests": c.Requests}
+	src := map[string]any{"coll": c.Coll, "requests": c.Requests}
 	out := util.ToJSON(src)
 	return &Result{Out: out}, nil
 }

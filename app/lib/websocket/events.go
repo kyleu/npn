@@ -10,12 +10,13 @@ import (
 
 	"github.com/kyleu/npn/app/lib/telemetry"
 	"github.com/kyleu/npn/app/lib/user"
+	dbuser "github.com/kyleu/npn/app/user"
 	"github.com/kyleu/npn/app/util"
 )
 
 // Registers a new Connection for this Service using the provided user.Profile and websocket.Conn.
-func (s *Service) Register(profile *user.Profile, accts user.Accounts, c *websocket.Conn, logger util.Logger) (*Connection, error) {
-	conn := NewConnection("system", profile, accts, c)
+func (s *Service) Register(u *dbuser.User, profile *user.Profile, accts user.Accounts, c *websocket.Conn, logger util.Logger) (*Connection, error) {
+	conn := NewConnection("system", u, profile, accts, c)
 	s.connectionsMu.Lock()
 	defer s.connectionsMu.Unlock()
 	s.connections[conn.ID] = conn

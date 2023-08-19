@@ -58,6 +58,7 @@
         <thead>
           <tr>
             <th class="shrink">ID</th>
+            <th>User ID</th>
             <th>Profile Name</th>
             <th>Service</th>
             <th>Channels</th>
@@ -68,6 +69,7 @@
           {%- for _, x := range p.Connections -%}
           <tr>
             <td class="shrink"><a href="/admin/sockets/conn/{%s x.ID.String() %}">{%s x.ID.String() %}</a></td>
+            <td><a href="/admin/db/user/{%s x.Profile.ID.String() %}">{%s x.Profile.ID.String() %}</a></td>
             <td>{%s x.Profile.String() %}</td>
             <td>{%s x.Svc %}</td>
             <td>{%s strings.Join(x.Channels, ", ") %}</td>
@@ -113,7 +115,7 @@
     <form action="/admin/sockets/conn/{%s p.Connection.ID.String() %}/send" method="post">
       <table class="mt expanded">
         <tbody>
-          {%= components.TableInput("from", "", "From", p.Connection.ID.String(), 5, "The connection this message is from") %}
+          {%= components.TableInput("from", "", "From", ps.Profile.ID.String(), 5, "The user this message is from") %}
           {%= components.TableInput("channel", "", "Channel", "", 5, "The channel this message is for") %}
           {%= components.TableInput("cmd", "", "Command", "", 5, "The command for this message") %}
           {%= components.TableTextarea("param", "", "Parameter", 8, "", 5, "JSON object message payload") %}
@@ -133,6 +135,10 @@
         <tr>
           <th>Connection ID</th>
           <td>{%s c.ID.String() %}</td>
+        </tr>
+        <tr>
+          <th>User ID</th>
+          <td><a href="/admin/db/user/{%s c.Profile.ID.String() %}">{%s c.Profile.ID.String() %}</a></td>
         </tr>
         <tr>
           <th>Name</th>

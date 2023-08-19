@@ -11,12 +11,14 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/kyleu/npn/app/lib/user"
+	dbuser "github.com/kyleu/npn/app/user"
 	"github.com/kyleu/npn/app/util"
 )
 
 // Represents a user's WebSocket session.
 type Connection struct {
 	ID       uuid.UUID     `json:"id"`
+	User     *dbuser.User  `json:"user,omitempty"`
 	Profile  *user.Profile `json:"profile,omitempty"`
 	Accounts user.Accounts `json:"accounts,omitempty"`
 	Svc      string        `json:"svc,omitempty"`
@@ -28,8 +30,8 @@ type Connection struct {
 }
 
 // Creates a new Connection.
-func NewConnection(svc string, profile *user.Profile, accounts user.Accounts, socket *websocket.Conn) *Connection {
-	return &Connection{ID: util.UUID(), Profile: profile, Accounts: accounts, Svc: svc, Started: util.TimeCurrent(), socket: socket}
+func NewConnection(svc string, usr *dbuser.User, profile *user.Profile, accounts user.Accounts, socket *websocket.Conn) *Connection {
+	return &Connection{ID: util.UUID(), User: usr, Profile: profile, Accounts: accounts, Svc: svc, Started: util.TimeCurrent(), socket: socket}
 }
 
 // Transforms this Connection to a serializable Status object.
@@ -41,6 +43,9 @@ func (c *Connection) ToStatus() *Status {
 }
 
 func (c *Connection) Username() string {
+	if c.User != nil {
+		return c.User.Name
+	}
 	return c.Profile.Name
 }
 

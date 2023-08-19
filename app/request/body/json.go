@@ -7,13 +7,13 @@ import (
 const KeyJSON = "json"
 
 type JSON struct {
-	Msg interface{} `json:"msg"`
+	Msg any `json:"msg"`
 	str string
 }
 
 var _ Config = (*JSON)(nil)
 
-func NewJSON(msg interface{}) *Body {
+func NewJSON(msg any) *Body {
 	return NewBody(KeyJSON, &JSON{Msg: msg})
 }
 

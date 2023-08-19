@@ -18,6 +18,7 @@ import (
 	"github.com/kyleu/npn/app/lib/telemetry"
 	"github.com/kyleu/npn/app/lib/theme"
 	"github.com/kyleu/npn/app/lib/user"
+	dbuser "github.com/kyleu/npn/app/user"
 	"github.com/kyleu/npn/app/util"
 )
 
@@ -46,6 +47,7 @@ type PageState struct {
 	Breadcrumbs    cmenu.Breadcrumbs `json:"breadcrumbs,omitempty"`
 	Flashes        []string          `json:"flashes,omitempty"`
 	Session        util.ValueMap     `json:"-"`
+	User           *dbuser.User      `json:"user,omitempty"`
 	Profile        *user.Profile     `json:"profile,omitempty"`
 	Accounts       user.Accounts     `json:"accounts,omitempty"`
 	Authed         bool              `json:"authed,omitempty"`
@@ -90,11 +92,17 @@ func (p *PageState) TitleString() string {
 }
 
 func (p *PageState) Username() string {
+	if p.User != nil {
+		return p.User.Name
+	}
 	return p.Profile.Name
 }
 
 func (p *PageState) AuthString() string {
 	n := p.Profile.String()
+	if p.User != nil {
+		n = p.User.Name
+	}
 	msg := fmt.Sprintf("signed in as %s", n)
 	if len(p.Accounts) == 0 {
 		if n == user.DefaultProfile.Name {

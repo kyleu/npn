@@ -11,114 +11,110 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func handleRequestMessage(s *websocket.Service, c *websocket.Connection, cmd string, param json.RawMessage) error {
+func (s *Service) handleRequestMessage(c *websocket.Connection, cmd string, param json.RawMessage, logger util.Logger) error {
 	switch cmd {
 	case ClientMessageRunURL:
-		return onRunURL(c, param, s)
+		return s.onRunURL(c, param, logger)
 	case ClientMessageGetRequest:
-		return onGetRequest(c, param, s)
+		return s.onGetRequest(c, param, logger)
 	case ClientMessageSaveRequest:
-		return onSaveRequest(c, param, s)
+		return s.onSaveRequest(c, param, logger)
 	case ClientMessageDeleteRequest:
-		return onDeleteRequest(c, param, s)
+		return s.onDeleteRequest(c, param, logger)
 	case ClientMessageCall:
-		return onCall(c, param, s)
+		return s.onCall(c, param, logger)
 	case ClientMessageTransform:
-		return onTransformRequest(c, param, s)
+		return s.onTransformRequest(c, param, logger)
 	default:
 		return errors.New("invalid request command [" + cmd + "]")
 	}
 }
 
-func onRunURL(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
+func (s *Service) onRunURL(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	url, err := util.FromJSONString(param)
 	if err != nil {
 		return errors.Wrap(err, "unable to read URL")
 	}
-	return AddRequestFromURL(s, c, "_", url)
+	return s.AddRequestFromURL(c, "_", url, logger)
 }
 
-func onGetRequest(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
-	svc := ctx(s)
+func (s *Service) onGetRequest(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &getRequestIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load getRequest param")
 	}
-	req, err := svc.Request.Load(&c.Profile.UserID, frm.Coll, frm.Req)
+	req, err := s.Request.Load(&c.Profile.ID, frm.Coll, frm.Req)
 	if err != nil {
-		msg := websocket.NewMessage("request", ServerMessageRequestNotFound, frm)
-		return s.WriteMessage(c.ID, msg)
+		msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestNotFound, frm)
+		return s.Socket.WriteMessage(c.ID, msg, logger)
 	}
 	ret := &reqDetailOut{Coll: frm.Coll, OrigKey: req.Key, Req: req}
-	msg := websocket.NewMessage("request", ServerMessageRequestDetail, ret)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestDetail, ret)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onSaveRequest(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
-	svc := ctx(s)
+func (s *Service) onSaveRequest(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &saveRequestIn{}
 	err := util.FromJSON(param, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load saveRequest param")
 	}
 	frm.Req = frm.Req.Minify()
-	err = svc.Request.Save(&c.Profile.UserID, frm.Coll, frm.Orig, frm.Req)
+	err = s.Request.Save(&c.Profile.ID, frm.Coll, frm.Orig, frm.Req)
 	if err != nil {
 		return errors.Wrap(err, "can't save request ["+frm.Req.Key+"]")
 	}
 	ret := &reqDetailOut{Coll: frm.Coll, OrigKey: frm.Orig, Req: frm.Req}
-	msg := websocket.NewMessage("request", ServerMessageRequestDetail, ret)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestDetail, ret)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onDeleteRequest(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
-	svc := ctx(s)
+func (s *Service) onDeleteRequest(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &deleteRequestIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load saveRequest param")
 	}
-	err = svc.Request.Delete(&c.Profile.UserID, frm.Coll, frm.Req)
+	err = s.Request.Delete(&c.Profile.ID, frm.Coll, frm.Req)
 	if err != nil {
 		return errors.Wrap(err, "can't remove request")
 	}
 
-	summaries, err := svc.Request.List(&c.Profile.UserID, frm.Coll)
+	summaries, err := s.Request.List(&c.Profile.ID, frm.Coll)
 	if err != nil {
 		return errors.Wrap(err, "can't list requests")
 	}
 
 	ret := &reqDeletedOut{Coll: frm.Coll, Req: frm.Req, Requests: summaries}
-	msg := websocket.NewMessage("request", ServerMessageRequestDeleted, ret)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestDeleted, ret)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func onCall(c *websocket.Connection, param json.RawMessage, s *websocket.Service) error {
-	svc := ctx(s)
+func (s *Service) onCall(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	frm := &callIn{}
 	err := util.FromJSONStrict(param, frm)
 	if err != nil {
 		return errors.Wrap(err, "can't load request call param")
 	}
 
-	sess, err := ctx(s).Session.Load(&c.Profile.UserID, frm.Sess)
+	sess, err := s.Session.Load(&c.Profile.ID, frm.Sess)
 	if err != nil {
 		return errors.Wrap(err, "can't load session ["+frm.Sess+"]")
 	}
 
 	go func() {
 		onStarted := func(started *call.RequestStarted) {
-			msg := websocket.NewMessage("request", ServerMessageRequestStarted, started)
-			_ = s.WriteMessage(c.ID, msg)
+			msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestStarted, started)
+			_ = s.Socket.WriteMessage(c.ID, msg, logger)
 		}
 		onCompleted := func(completed *call.RequestCompleted) {
-			msg := websocket.NewMessage("request", ServerMessageRequestCompleted, completed)
-			_ = s.WriteMessage(c.ID, msg)
+			msg := websocket.NewMessage(&c.Profile.ID, "request", ServerMessageRequestCompleted, completed)
+			_ = s.Socket.WriteMessage(c.ID, msg, logger)
 		}
-		err := svc.Caller.Call(&c.Profile.UserID, frm.Coll, frm.Req, frm.Proto, sess, onStarted, onCompleted)
+		err := s.Caller.Call(&c.Profile.ID, frm.Coll, frm.Req, frm.Proto, sess, onStarted, onCompleted)
 		if err != nil {
-			s.Logger.Warn(fmt.Sprintf("error calling [%v]: %+v", frm.Req, err))
+			logger.Warn(fmt.Sprintf("error calling [%v]: %+v", frm.Req, err))
 		}
 	}()
 

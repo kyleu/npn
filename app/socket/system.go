@@ -5,49 +5,36 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/kyleu/npn/app/lib/search"
 	"github.com/kyleu/npn/app/lib/websocket"
+	"github.com/kyleu/npn/app/request/search"
 	"github.com/kyleu/npn/app/util"
 )
 
-func handleSystemMessage(s *websocket.Service, c *websocket.Connection, cmd string, param json.RawMessage) error {
+func (s *Service) handleSystemMessage(c *websocket.Connection, cmd string, param json.RawMessage, logger util.Logger) error {
 	switch cmd {
-	case ClientMessageTestbed:
-		return testbed(param, s)
 	case ClientMessageSearch:
-		return onSearch(s, c, param)
+		return s.onSearch(c, param, logger)
 	case ClientMessageSaveProfile:
-		return saveProfile(s, c, param)
+		return s.saveProfile(c, param)
 	default:
 		return errors.New("unhandled system command [" + cmd + "]")
 	}
 }
 
-func onSearch(s *websocket.Service, c *websocket.Connection, param json.RawMessage) error {
+func (s *Service) onSearch(c *websocket.Connection, param json.RawMessage, logger util.Logger) error {
 	sp := &search.Params{}
 	err := util.FromJSON(param, sp)
 	if err != nil {
 		return errors.Wrap(err, "unable to parse search params")
 	}
-	results, err := ctx(s).Search.Run(sp, &c.Profile.UserID, c.Profile.Role)
+	results, err := s.Search.Run(sp, &c.Profile.ID)
 	if err != nil {
 		return errors.Wrap(err, "search error")
 	}
-	msg := websocket.NewMessage("system", ServerMessageSearchResults, results)
-	return s.WriteMessage(c.ID, msg)
+	msg := websocket.NewMessage(&c.Profile.ID, "system", ServerMessageSearchResults, results)
+	return s.Socket.WriteMessage(c.ID, msg, logger)
 }
 
-func saveProfile(s *websocket.Service, c *websocket.Connection, param json.RawMessage) error {
-	p := &npnuser.Profile{}
-	err := util.FromJSON(param, p)
-	if err != nil {
-		return errors.Wrap(err, "unable to parse profile")
-	}
-	p.UserID = c.Profile.UserID
-	p.Role = c.Profile.Role
-
-	svcs := ctx(s)
-
-	_, err = svcs.User.SaveProfile(p.ToUserProfile())
-	return err
+func (s *Service) saveProfile(c *websocket.Connection, param json.RawMessage) error {
+	return nil
 }
