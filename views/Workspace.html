@@ -8,6 +8,14 @@
 {% code type Workspace struct { layout.Basic } %}
 
 {% func (p *Workspace) Head(as *app.State, ps *cutil.PageState) %}
+  <meta charset="UTF-8">
+  <title>{%s ps.TitleString() %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta property="og:title" content="{%s ps.TitleString() %}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/logo.svg">
+  <meta property="og:locale" content="en_US">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
   <link href="/assets/vendor/{%s util.AppKey %}.css" rel="stylesheet">
   <script src="/assets/vendor/vendor.js"></script>
   <script src="/assets/vendor/{%s util.AppKey %}.js"></script>
