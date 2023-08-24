@@ -13,7 +13,6 @@ func Workspace(rc *fasthttp.RequestCtx) {
 		if err != nil {
 			return "", err
 		}
-
 		ps.Data = x
 		return Render(rc, as, &views.Workspace{}, ps)
 	})

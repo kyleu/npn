@@ -19,6 +19,6 @@ var homeContent = util.ValueMap{
 func Home(rc *fasthttp.RequestCtx) {
 	Act("home", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ps.Data = homeContent
-		return Render(rc, as, &views.Home{}, ps)
+		return Render(rc, as, &views.Workspace{}, ps)
 	})
 }

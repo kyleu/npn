@@ -9,87 +9,170 @@ import (
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
 	"github.com/kyleu/npn/app/util"
-	"github.com/kyleu/npn/views/components"
 	"github.com/kyleu/npn/views/layout"
 )
 
-//line views/Workspace.html:9
+//line views/Workspace.html:8
 import (
 	qtio422016 "io"
 
 	qt422016 "github.com/valyala/quicktemplate"
 )
 
-//line views/Workspace.html:9
+//line views/Workspace.html:8
 var (
 	_ = qtio422016.Copy
 	_ = qt422016.AcquireByteBuffer
 )
 
-//line views/Workspace.html:9
+//line views/Workspace.html:8
 type Workspace struct{ layout.Basic }
 
-//line views/Workspace.html:11
-func (p *Workspace) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/Workspace.html:11
+//line views/Workspace.html:10
+func (p *Workspace) StreamHead(qw422016 *qt422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:10
 	qw422016.N().S(`
-  <div class="card">
-    <h3>`)
-//line views/Workspace.html:13
-	components.StreamSVGRefIcon(qw422016, `app`, ps)
-//line views/Workspace.html:13
-	qw422016.E().S(util.AppName)
-//line views/Workspace.html:13
-	qw422016.N().S(`</h3>
-    <em>v`)
-//line views/Workspace.html:14
-	qw422016.E().S(as.BuildInfo.Version)
-//line views/Workspace.html:14
-	qw422016.N().S(`, started `)
-//line views/Workspace.html:14
-	qw422016.E().S(util.TimeRelative(&as.Started))
-//line views/Workspace.html:14
-	qw422016.N().S(`</em>
-  </div>
   <link href="/assets/vendor/`)
-//line views/Workspace.html:16
+//line views/Workspace.html:11
 	qw422016.E().S(util.AppKey)
-//line views/Workspace.html:16
+//line views/Workspace.html:11
 	qw422016.N().S(`.css" rel="stylesheet">
   <script src="/assets/vendor/vendor.js"></script>
   <script src="/assets/vendor/`)
-//line views/Workspace.html:18
+//line views/Workspace.html:13
 	qw422016.E().S(util.AppKey)
-//line views/Workspace.html:18
+//line views/Workspace.html:13
 	qw422016.N().S(`.js"></script>
   <script src="/assets/vendor/editor/editor.js" defer="defer"></script>
-  <script>init(true, true);</script>
 `)
-//line views/Workspace.html:21
+//line views/Workspace.html:15
 }
 
-//line views/Workspace.html:21
-func (p *Workspace) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/Workspace.html:21
+//line views/Workspace.html:15
+func (p *Workspace) WriteHead(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:15
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line views/Workspace.html:21
-	p.StreamBody(qw422016, as, ps)
-//line views/Workspace.html:21
+//line views/Workspace.html:15
+	p.StreamHead(qw422016, as, ps)
+//line views/Workspace.html:15
 	qt422016.ReleaseWriter(qw422016)
-//line views/Workspace.html:21
+//line views/Workspace.html:15
+}
+
+//line views/Workspace.html:15
+func (p *Workspace) Head(as *app.State, ps *cutil.PageState) string {
+//line views/Workspace.html:15
+	qb422016 := qt422016.AcquireByteBuffer()
+//line views/Workspace.html:15
+	p.WriteHead(qb422016, as, ps)
+//line views/Workspace.html:15
+	qs422016 := string(qb422016.B)
+//line views/Workspace.html:15
+	qt422016.ReleaseByteBuffer(qb422016)
+//line views/Workspace.html:15
+	return qs422016
+//line views/Workspace.html:15
+}
+
+//line views/Workspace.html:17
+func (p *Workspace) StreamNav(qw422016 *qt422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:17
+}
+
+//line views/Workspace.html:17
+func (p *Workspace) WriteNav(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:17
+	qw422016 := qt422016.AcquireWriter(qq422016)
+//line views/Workspace.html:17
+	p.StreamNav(qw422016, as, ps)
+//line views/Workspace.html:17
+	qt422016.ReleaseWriter(qw422016)
+//line views/Workspace.html:17
+}
+
+//line views/Workspace.html:17
+func (p *Workspace) Nav(as *app.State, ps *cutil.PageState) string {
+//line views/Workspace.html:17
+	qb422016 := qt422016.AcquireByteBuffer()
+//line views/Workspace.html:17
+	p.WriteNav(qb422016, as, ps)
+//line views/Workspace.html:17
+	qs422016 := string(qb422016.B)
+//line views/Workspace.html:17
+	qt422016.ReleaseByteBuffer(qb422016)
+//line views/Workspace.html:17
+	return qs422016
+//line views/Workspace.html:17
+}
+
+//line views/Workspace.html:19
+func (p *Workspace) StreamMenu(qw422016 *qt422016.Writer, ps *cutil.PageState) {
+//line views/Workspace.html:19
+}
+
+//line views/Workspace.html:19
+func (p *Workspace) WriteMenu(qq422016 qtio422016.Writer, ps *cutil.PageState) {
+//line views/Workspace.html:19
+	qw422016 := qt422016.AcquireWriter(qq422016)
+//line views/Workspace.html:19
+	p.StreamMenu(qw422016, ps)
+//line views/Workspace.html:19
+	qt422016.ReleaseWriter(qw422016)
+//line views/Workspace.html:19
+}
+
+//line views/Workspace.html:19
+func (p *Workspace) Menu(ps *cutil.PageState) string {
+//line views/Workspace.html:19
+	qb422016 := qt422016.AcquireByteBuffer()
+//line views/Workspace.html:19
+	p.WriteMenu(qb422016, ps)
+//line views/Workspace.html:19
+	qs422016 := string(qb422016.B)
+//line views/Workspace.html:19
+	qt422016.ReleaseByteBuffer(qb422016)
+//line views/Workspace.html:19
+	return qs422016
+//line views/Workspace.html:19
 }
 
 //line views/Workspace.html:21
+func (p *Workspace) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:21
+	qw422016.N().S(`
+`)
+//line views/Workspace.html:22
+	ps.Icons = nil
+
+//line views/Workspace.html:22
+	qw422016.N().S(`  <div id="npn"></div>
+  <script>document.addEventListener("DOMContentLoaded", () => init(true, true));</script>
+`)
+//line views/Workspace.html:25
+}
+
+//line views/Workspace.html:25
+func (p *Workspace) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
+//line views/Workspace.html:25
+	qw422016 := qt422016.AcquireWriter(qq422016)
+//line views/Workspace.html:25
+	p.StreamBody(qw422016, as, ps)
+//line views/Workspace.html:25
+	qt422016.ReleaseWriter(qw422016)
+//line views/Workspace.html:25
+}
+
+//line views/Workspace.html:25
 func (p *Workspace) Body(as *app.State, ps *cutil.PageState) string {
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 	qb422016 := qt422016.AcquireByteBuffer()
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 	p.WriteBody(qb422016, as, ps)
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 	qs422016 := string(qb422016.B)
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 	qt422016.ReleaseByteBuffer(qb422016)
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 	return qs422016
-//line views/Workspace.html:21
+//line views/Workspace.html:25
 }
