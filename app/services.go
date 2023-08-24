@@ -29,7 +29,7 @@ func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services,
 	ws := websocket.NewService(nil, nil, nil)
 
 	multiuser := util.GetEnvBool("npn_multiuser", false)
-	us := user.NewService()
+	us := user.NewService(st.Files, logger)
 	ss := session.NewService(multiuser, st.Files, logger)
 	co := collection.NewService(multiuser, st.Files, logger)
 	rq := request.NewService(multiuser, st.Files, logger)

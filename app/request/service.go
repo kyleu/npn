@@ -109,13 +109,12 @@ func (s *Service) Save(userID *uuid.UUID, coll string, originalKey string, req *
 
 	msg := util.ToJSONBytes(req, true)
 
-	// TODO fix
-	//err := s.saveHistory(userID, coll, req, p, msg)
-	//if err != nil {
-	//	return errors.Wrap(err, "unable to save history")
-	//}
+	err := s.saveHistory(userID, coll, req, p, msg)
+	if err != nil {
+		return errors.Wrap(err, "unable to save history")
+	}
 
-	err := s.files.WriteFile(p, msg, filesystem.DefaultMode, true)
+	err = s.files.WriteFile(p, msg, filesystem.DefaultMode, true)
 	if err != nil {
 		return errors.Wrap(err, "unable to write file")
 	}
