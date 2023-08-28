@@ -1,9 +1,10 @@
 package body
 
 import (
-	"github.com/kyleu/npn/app/util"
 	"net/url"
 	"strings"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 const KeyForm = "form"

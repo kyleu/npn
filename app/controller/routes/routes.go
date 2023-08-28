@@ -30,6 +30,8 @@ func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
 	themeRoutes(r)
 
 	// $PF_SECTION_START(routes)$
+	r.GET("/download", controller.Workspace)
+
 	r.GET("/x", controller.Workspace)
 	r.GET("/a", controller.Workspace)
 	r.GET("/cfg", controller.Workspace)

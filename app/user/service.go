@@ -1,11 +1,13 @@
 package user
 
 import (
+	"path"
+
 	"github.com/google/uuid"
+
 	"github.com/kyleu/npn/app/lib/filesystem"
 	"github.com/kyleu/npn/app/lib/filter"
 	"github.com/kyleu/npn/app/util"
-	"path"
 )
 
 type Service struct {

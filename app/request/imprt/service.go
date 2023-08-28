@@ -1,12 +1,14 @@
 package imprt
 
 import (
-	"github.com/kyleu/npn/app/lib/filesystem"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"mime/multipart"
 	"path"
+
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/lib/filesystem"
+	"github.com/kyleu/npn/app/util"
 )
 
 type Service struct {

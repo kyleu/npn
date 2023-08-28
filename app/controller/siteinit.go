@@ -11,6 +11,6 @@ func initSite(*app.State, util.Logger) {
 }
 
 // Configure marketing site data for each request.
-func initSiteRequest(*app.State, *cutil.PageState) error {
+func initSiteRequest(as *app.State, _ *cutil.PageState) error {
 	return nil
 }

@@ -1,11 +1,13 @@
 package collection
 
 import (
+	"path"
+
 	"github.com/google/uuid"
+	"github.com/pkg/errors"
+
 	"github.com/kyleu/npn/app/lib/filesystem"
 	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
-	"path"
 )
 
 type Service struct {

@@ -1,9 +1,11 @@
 package request
 
 import (
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"strings"
+
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 type Request struct {

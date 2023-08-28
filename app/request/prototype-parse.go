@@ -1,12 +1,13 @@
 package request
 
 import (
-	"github.com/kyleu/npn/app/request/auth"
-	"github.com/kyleu/npn/app/request/queryparam"
-	"github.com/kyleu/npn/app/util"
 	"net/url"
 	"strconv"
 	"strings"
+
+	"github.com/kyleu/npn/app/request/auth"
+	"github.com/kyleu/npn/app/request/queryparam"
+	"github.com/kyleu/npn/app/util"
 )
 
 func PrototypeFromURL(u *url.URL) *Prototype {

@@ -1,8 +1,9 @@
 package imprt
 
 import (
-	"github.com/kyleu/npn/app/request/transform"
 	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/request/transform"
 )
 
 func parseOpenAPI3(content []byte, src string) *phase {

@@ -1,9 +1,10 @@
 package queryparam
 
 import (
-	"github.com/kyleu/npn/app/util"
 	"net/url"
 	"strings"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 // Respresent an entry in a URL's querystring along with a description

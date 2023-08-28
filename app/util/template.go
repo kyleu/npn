@@ -1,8 +1,9 @@
 package util
 
 import (
-	"github.com/pkg/errors"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 var defaultPrefix = "{"

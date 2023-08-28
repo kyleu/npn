@@ -2,10 +2,11 @@
 package user
 
 import (
-	"github.com/kyleu/npn/app/util"
 	"time"
 
 	"github.com/google/uuid"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 type User struct {

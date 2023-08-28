@@ -1,17 +1,17 @@
 package request
 
 import (
-	"github.com/kyleu/npn/app/lib/filesystem"
-	"github.com/kyleu/npn/app/util"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/google/uuid"
+	"github.com/kyleu/npn/app/lib/filesystem"
+	"github.com/kyleu/npn/app/util"
 )
 
 const shouldSaveHistory = true

@@ -1,10 +1,11 @@
 package header
 
 import (
-	"github.com/kyleu/npn/app/util"
 	"net/http"
 	"sort"
 	"strings"
+
+	"github.com/kyleu/npn/app/util"
 )
 
 type Header struct {

@@ -7,10 +7,13 @@ import (
 	"sync"
 	"time"
 
+	"github.com/google/uuid"
+
 	"github.com/kyleu/npn/app/lib/auth"
 	"github.com/kyleu/npn/app/lib/filesystem"
 	"github.com/kyleu/npn/app/lib/telemetry"
 	"github.com/kyleu/npn/app/lib/theme"
+	"github.com/kyleu/npn/app/user"
 	"github.com/kyleu/npn/app/util"
 )
 
@@ -71,4 +74,11 @@ func NewState(debug bool, bi *BuildInfo, f filesystem.FileLoader, enableTelemetr
 func (s State) Close(ctx context.Context, logger util.Logger) error {
 	defer func() { _ = telemetry.Close(ctx) }()
 	return s.Services.Close(ctx, logger)
+}
+
+func (s State) User(ctx context.Context, id uuid.UUID, logger util.Logger) (*user.User, error) {
+	if s.Services == nil || s.Services.User == nil {
+		return nil, nil
+	}
+	return s.Services.User.Get(ctx, nil, id, logger)
 }

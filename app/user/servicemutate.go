@@ -2,10 +2,10 @@ package user
 
 import (
 	"context"
-	"github.com/kyleu/npn/app/lib/filesystem"
 
 	"github.com/google/uuid"
 
+	"github.com/kyleu/npn/app/lib/filesystem"
 	"github.com/kyleu/npn/app/util"
 )
 

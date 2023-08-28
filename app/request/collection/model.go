@@ -1,10 +1,10 @@
 package collection
 
 import (
-	"github.com/kyleu/npn/app/request/session"
 	"strings"
 
 	"github.com/kyleu/npn/app/request"
+	"github.com/kyleu/npn/app/request/session"
 )
 
 type Collection struct {

@@ -1,12 +1,14 @@
 package collection
 
 import (
-	"github.com/google/uuid"
-	"github.com/kyleu/npn/app/lib/filesystem"
-	"github.com/kyleu/npn/app/util"
-	"github.com/pkg/errors"
 	"os"
 	"path"
+
+	"github.com/google/uuid"
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/npn/app/lib/filesystem"
+	"github.com/kyleu/npn/app/util"
 )
 
 func (s *Service) Save(userID *uuid.UUID, originalKey string, newKey string, title string, description string) error {
