@@ -20,5 +20,5 @@ cp ./assets/favicon.ico ./build/wasm/favicon.ico
 cp ./assets/logo.svg ./build/wasm/assets/logo.svg
 cp ./assets/logo.svg ./build/wasm/logo.svg
 
-echo "building Project Forge WASM server library..."
+echo "building NPN WASM server library..."
 GOOS=js GOARCH=wasm go build -o ./build/wasm/npn.wasm .

@@ -28,10 +28,11 @@ type Service struct {
 }
 
 func NewService(
-	us *user.Service, ss *session.Service, co *collection.Service, rq *request.Service,
-	cl *call.Service, sr *search.Service, im *imprt.Service, ws *websocket.Service,
+	us *user.Service, ss *session.Service, co *collection.Service, rq *request.Service, cl *call.Service, sr *search.Service, im *imprt.Service,
 ) *Service {
-	return &Service{User: us, Session: ss, Collection: co, Request: rq, Caller: cl, Search: sr, Import: im, Socket: ws}
+	ret := &Service{User: us, Session: ss, Collection: co, Request: rq, Caller: cl, Search: sr, Import: im}
+	ret.Socket = websocket.NewService(nil, nil, nil)
+	return ret
 }
 
 func (s *Service) handler(c *websocket.Connection, svc string, cmd string, param json.RawMessage, logger util.Logger) error {

@@ -26,7 +26,6 @@ type Services struct {
 
 func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services, error) {
 	scr := scripting.NewService(st.Files, "scripts")
-	ws := websocket.NewService(nil, nil, nil)
 
 	multiuser := util.GetEnvBool("npn_multiuser", false)
 	us := user.NewService(st.Files, logger)
@@ -36,9 +35,9 @@ func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services,
 	cl := call.NewService(ss, logger)
 	sr := search.NewService(co, rq, logger)
 	im := imprt.NewService(st.Files, logger)
-	npn := socket.NewService(us, ss, co, rq, cl, sr, im, ws)
+	npn := socket.NewService(us, ss, co, rq, cl, sr, im)
 
-	return &Services{Script: scr, Socket: ws, User: us, NPN: npn}, nil
+	return &Services{Script: scr, Socket: npn.Socket, User: us, NPN: npn}, nil
 }
 
 func (s *Services) Close(_ context.Context, _ util.Logger) error {
