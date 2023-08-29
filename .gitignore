@@ -3,6 +3,7 @@
 /.vscode
 /.idea
 /.scannerwork
+/assets/vendor/*.map
 /build
 /client/node_modules
 /tmp
