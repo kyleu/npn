@@ -2,6 +2,7 @@
 {% import (
   "github.com/kyleu/npn/app"
   "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/util"
   "github.com/kyleu/npn/views/components"
   "github.com/kyleu/npn/views/layout"
 ) %}
@@ -9,6 +10,7 @@
 {% code type List struct {
   layout.Basic
   Scripts []string
+  Sizes map[string]int
 } %}
 
 {% func (p *List) Body(as *app.State, ps *cutil.PageState) %}
@@ -20,12 +22,14 @@
         <thead>
           <tr>
             <th class="shrink">Name</th>
+            <th class="text-align-right">Size</th>
           </tr>
         </thead>
         <tbody>
           {%- for _, x := range p.Scripts -%}
           <tr>
             <td><a href="/admin/scripting/{%s x %}">{%s x %}</a></td>
+            <td class="text-align-right">{%s util.ByteSizeSI(int64(p.Sizes[x])) %}</td>
           </tr>
           {%- endfor -%}
         </tbody>
