@@ -2,12 +2,15 @@
 package scripting
 
 import (
+	"context"
 	"path/filepath"
 	"strings"
 
 	"github.com/samber/lo"
 
 	"github.com/kyleu/npn/app/lib/filesystem"
+	"github.com/kyleu/npn/app/lib/filter"
+	"github.com/kyleu/npn/app/lib/search/result"
 	"github.com/kyleu/npn/app/util"
 )
 
@@ -66,4 +69,15 @@ func (s *Service) Size(scr string) int {
 		return 0
 	}
 	return int(st.Size)
+}
+
+func (s *Service) SearchScripts(ctx context.Context, ps filter.ParamSet, q string, logger util.Logger) (result.Results, error) {
+	return lo.FilterMap(s.ListScripts(logger), func(fn string, _ int) (*result.Result, bool) {
+		scr, _ := s.LoadScript(fn, logger)
+		res := result.NewResult("script", fn, "/admin/scripting/"+fn, fn, "file-code", scr, scr, q)
+		if len(res.Matches) > 0 {
+			return res, true
+		}
+		return nil, false
+	}), nil
 }
