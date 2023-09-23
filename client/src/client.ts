@@ -10,6 +10,7 @@ import {autocompleteInit} from "./autocomplete";
 import {modalInit} from "./modal";
 import {tagsInit} from "./tags";
 import {editorInit} from "./editor";
+import {formInit} from "./form";
 import {themeInit} from "./theme";
 import {socketInit} from "./socket";
 import {appInit} from "./app";
@@ -30,7 +31,7 @@ declare global {
 }
 
 export function init(): void {
-  const [s, i] = editorInit();
+  const [s, i] = formInit();
   window.npn = {
     relativeTime: timeInit(),
     autocomplete: autocompleteInit(),
@@ -45,6 +46,7 @@ export function init(): void {
   linkInit();
   modalInit();
   themeInit();
+  editorInit();
   window.audit = audit;
   appInit();
 }
