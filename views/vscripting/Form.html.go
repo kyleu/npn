@@ -75,53 +75,55 @@ func (p *Form) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 	}
 //line views/vscripting/Form.html:22
 	qw422016.N().S(`    <form action="" class="mt" method="post">
-      <table class="mt expanded">
-        <tbody>
-          `)
-//line views/vscripting/Form.html:26
+      <div class="overflow full-width">
+        <table class="mt expanded">
+          <tbody>
+            `)
+//line views/vscripting/Form.html:27
 	if p.Path == "" {
-//line views/vscripting/Form.html:26
+//line views/vscripting/Form.html:27
 		components.StreamTableInput(qw422016, "path", "", "Path", p.Path, 5, "Path to script")
-//line views/vscripting/Form.html:26
+//line views/vscripting/Form.html:27
 	}
-//line views/vscripting/Form.html:26
-	qw422016.N().S(`
-          `)
 //line views/vscripting/Form.html:27
+	qw422016.N().S(`
+            `)
+//line views/vscripting/Form.html:28
 	components.StreamTableTextarea(qw422016, "content", "", "Content", 12, p.Content, 5, "Script contents")
-//line views/vscripting/Form.html:27
+//line views/vscripting/Form.html:28
 	qw422016.N().S(`
-          <tr><td colspan="2"><button type="submit">Save Script</button></td></tr>
-        </tbody>
-      </table>
+            <tr><td colspan="2"><button type="submit">Save Script</button></td></tr>
+          </tbody>
+        </table>
+      </div>
     </form>
   </div>
 `)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 }
 
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 func (p *Form) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	p.StreamBody(qw422016, as, ps)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	qt422016.ReleaseWriter(qw422016)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 }
 
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 func (p *Form) Body(as *app.State, ps *cutil.PageState) string {
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	qb422016 := qt422016.AcquireByteBuffer()
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	p.WriteBody(qb422016, as, ps)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	qs422016 := string(qb422016.B)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	qt422016.ReleaseByteBuffer(qb422016)
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 	return qs422016
-//line views/vscripting/Form.html:33
+//line views/vscripting/Form.html:35
 }

@@ -128,71 +128,73 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 //line views/vscripting/Detail.html:43
 			qw422016.N().S(`] Example Results</h3>
       <div class="mt">
-        <table class="expanded min-200">
-          <thead>
-            <tr>
-              <th class="shrink">Example</th>
-              <th>Result</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div class="overflow full-width">
+          <table class="expanded min-200">
+            <thead>
+              <tr>
+                <th class="shrink">Example</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
 `)
-//line views/vscripting/Detail.html:53
-			for _, k := range util.ArraySorted(lo.Keys(res)) {
 //line views/vscripting/Detail.html:54
+			for _, k := range util.ArraySorted(lo.Keys(res)) {
+//line views/vscripting/Detail.html:55
 				v := res[k]
 
-//line views/vscripting/Detail.html:54
-				qw422016.N().S(`            <tr>
-              <td><pre>`)
-//line views/vscripting/Detail.html:56
+//line views/vscripting/Detail.html:55
+				qw422016.N().S(`              <tr>
+                <td><pre>`)
+//line views/vscripting/Detail.html:57
 				qw422016.E().S(k)
-//line views/vscripting/Detail.html:56
-				qw422016.N().S(`</pre></td>
-              <td><pre>`)
 //line views/vscripting/Detail.html:57
+				qw422016.N().S(`</pre></td>
+                <td><pre>`)
+//line views/vscripting/Detail.html:58
 				qw422016.E().S(util.ToJSONCompact(v))
-//line views/vscripting/Detail.html:57
+//line views/vscripting/Detail.html:58
 				qw422016.N().S(`</pre></td>
-            </tr>
+              </tr>
 `)
-//line views/vscripting/Detail.html:59
+//line views/vscripting/Detail.html:60
 			}
-//line views/vscripting/Detail.html:59
-			qw422016.N().S(`          </tbody>
-        </table>
+//line views/vscripting/Detail.html:60
+			qw422016.N().S(`            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 `)
-//line views/vscripting/Detail.html:64
+//line views/vscripting/Detail.html:66
 		}
-//line views/vscripting/Detail.html:65
+//line views/vscripting/Detail.html:67
 	}
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 }
 
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 func (p *Detail) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	p.StreamBody(qw422016, as, ps)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	qt422016.ReleaseWriter(qw422016)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 }
 
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 func (p *Detail) Body(as *app.State, ps *cutil.PageState) string {
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	qb422016 := qt422016.AcquireByteBuffer()
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	p.WriteBody(qb422016, as, ps)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	qs422016 := string(qb422016.B)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	qt422016.ReleaseByteBuffer(qb422016)
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 	return qs422016
-//line views/vscripting/Detail.html:66
+//line views/vscripting/Detail.html:68
 }
