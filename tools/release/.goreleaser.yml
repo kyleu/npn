@@ -60,7 +60,7 @@ dist: "build/dist"
 nfpms:
   -
     vendor: "Kyle U"
-    homepage: "https://github.com/kyleu/npn}"
+    homepage: "https://github.com/kyleu/npn"
     maintainer: "Kyle U <npn@kyleu.com>"
     description: "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app."
     license: "MIT"
