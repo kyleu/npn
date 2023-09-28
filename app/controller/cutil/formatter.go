@@ -1,4 +1,4 @@
-// Content managed by Project Forge, see [projectforge.md] for details.
+// Package cutil - Content managed by Project Forge, see [projectforge.md] for details.
 package cutil
 
 import (
@@ -27,14 +27,6 @@ func FormatJSON(v any) (string, error) {
 func FormatLang(content string, lang string) (string, error) {
 	l := lexers.Get(lang)
 	return FormatString(content, l)
-}
-
-func FormatLangIgnoreErrors(content string, lang string) string {
-	ret, err := FormatLang(content, lang)
-	if err != nil {
-		return fmt.Sprintf("encoding error: %s\n%s", err.Error(), content)
-	}
-	return ret
 }
 
 func FormatFilename(content string, filename string) (string, error) {

@@ -1,11 +1,11 @@
-// Content managed by Project Forge, see [projectforge.md] for details.
+// Package theme - Content managed by Project Forge, see [projectforge.md] for details.
 package theme
 
 import (
 	"github.com/kyleu/npn/app/util"
 )
 
-var ThemeDefault = func() *Theme {
+var Default = func() *Theme {
 	nbl := "#193441"
 	if o := util.GetEnv("app_nav_color_light"); o != "" {
 		nbl = o
