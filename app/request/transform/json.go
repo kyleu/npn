@@ -7,8 +7,7 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-type JSON struct {
-}
+type JSON struct{}
 
 var _ RequestTransformer = (*JSON)(nil)
 

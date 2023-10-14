@@ -25,10 +25,10 @@ func Gantt(rc *fasthttp.RequestCtx) {
 	Act("gantt", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
 		rowHeight := 24
 		sections, completed, mode := parseGanttRequest(rc)
-		var pc = func(n int) float64 { return math.Floor((float64(n)/float64(completed))*10000) / 100 }
+		pc := func(n int) float64 { return math.Floor((float64(n)/float64(completed))*10000) / 100 }
 
 		ret := make([]string, 0, len(sections)+2)
-		var ap = func(s string) {
+		ap := func(s string) {
 			ret = append(ret, s)
 		}
 
@@ -71,7 +71,7 @@ func parseGanttRequest(rc *fasthttp.RequestCtx) ([]*ganttSection, int, string) {
 	width := -1
 	mode := "light"
 	ret := make([]*ganttSection, 0)
-	var get = func(k string) *ganttSection {
+	get := func(k string) *ganttSection {
 		for _, s := range ret {
 			if s.Key == k {
 				return s
@@ -111,9 +111,11 @@ func parseGanttRequest(rc *fasthttp.RequestCtx) ([]*ganttSection, int, string) {
 	return ret, width, mode
 }
 
-var dark = "dark"
-var lightColor = "#397adb"
-var darkColor = "#101e33"
+var (
+	dark       = "dark"
+	lightColor = "#397adb"
+	darkColor  = "#101e33"
+)
 
 func colorForSection(key string, mode string) string {
 	switch key {

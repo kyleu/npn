@@ -9,8 +9,7 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-type HTTP struct {
-}
+type HTTP struct{}
 
 var _ RequestTransformer = (*HTTP)(nil)
 
@@ -33,7 +32,7 @@ func (x *HTTP) ApplyToMultiple() bool {
 func (x *HTTP) TransformRequest(p *request.Prototype, sess *session.Session, logger util.Logger) (*Result, error) {
 	out := []string{}
 
-	var app = func(s string) {
+	app := func(s string) {
 		out = append(out, s)
 	}
 

@@ -26,7 +26,6 @@ func (s *Service) List(ctx context.Context, params *filter.Params, logger util.L
 		}
 	}
 	return ret, nil
-
 }
 
 func (s *Service) Count(ctx context.Context, whereClause string, logger util.Logger, args ...any) (int, error) {

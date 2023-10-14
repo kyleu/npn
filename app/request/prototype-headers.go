@@ -13,7 +13,7 @@ import (
 func (p *Prototype) FinalHeaders(sess *session.Session) header.Headers {
 	ret := p.Headers.Clone()
 
-	var check = func(k string, f func() string) {
+	check := func(k string, f func() string) {
 		if (!p.Headers.Contains(k)) && (!p.ExcludesHeader(k)) {
 			s := f()
 			if len(s) > 0 {

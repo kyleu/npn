@@ -12,8 +12,7 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-type Postman struct {
-}
+type Postman struct{}
 
 var _ RequestTransformer = (*Postman)(nil)
 

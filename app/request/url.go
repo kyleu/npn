@@ -55,7 +55,7 @@ type URLPart struct {
 
 func (p *Prototype) URLParts() []*URLPart {
 	ret := []*URLPart{}
-	var add = func(k string, v string) {
+	add := func(k string, v string) {
 		ret = append(ret, &URLPart{Key: k, Value: v})
 	}
 	add("protocol", p.Protocol.String())

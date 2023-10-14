@@ -7,8 +7,10 @@ import (
 
 var SystemUserID = UUIDFromStringOK("ffffffff-ffff-ffff-ffff-ffffffffffff")
 
-var regexpNonAuthorizedChars = regexp.MustCompile("[^a-zA-Z0-9-._]")
-var regexpMultipleDashes = regexp.MustCompile("-+")
+var (
+	regexpNonAuthorizedChars = regexp.MustCompile("[^a-zA-Z0-9-._]")
+	regexpMultipleDashes     = regexp.MustCompile("-+")
+)
 
 // Converts a string to a URL-safe representation, replacing forbidden charaters with "-"
 func Slugify(s string) (slug string) {

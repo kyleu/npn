@@ -100,7 +100,7 @@ func (t *Timing) Trace() *httptrace.ClientTrace {
 
 func (t *Timing) Sections() []*TimingSection {
 	ret := make([]*TimingSection, 0, 5)
-	var add = func(k string, s int, e int) {
+	add := func(k string, s int, e int) {
 		ret = append(ret, &TimingSection{Key: k, Start: s, End: e})
 	}
 	add("dns", t.DNSStart, t.DNSEnd)

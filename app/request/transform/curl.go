@@ -35,10 +35,10 @@ func (x *CURL) ApplyToMultiple() bool {
 func (x *CURL) TransformRequest(p *request.Prototype, sess *session.Session, logger util.Logger) (*Result, error) {
 	out := []string{"curl"}
 
-	var app = func(s string) {
+	app := func(s string) {
 		out = append(out, s)
 	}
-	var esc = func(s string) string {
+	esc := func(s string) string {
 		return strings.ReplaceAll(s, "'", "'\\''")
 	}
 

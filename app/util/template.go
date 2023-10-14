@@ -6,8 +6,10 @@ import (
 	"github.com/pkg/errors"
 )
 
-var defaultPrefix = "{"
-var defaultSuffix = "}"
+var (
+	defaultPrefix = "{"
+	defaultSuffix = "}"
+)
 
 // Merges the provided string with the provided template data using "{" and "}" as affixes
 func Merge(content string, args ValueMap) (string, error) {
