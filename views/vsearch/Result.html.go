@@ -80,7 +80,9 @@ func StreamResult(qw422016 *qt422016.Writer, res *result.Result, params *search.
 //line views/vsearch/Result.html:22
 	if res.Icon != "" {
 //line views/vsearch/Result.html:22
-		components.StreamSVGRefIcon(qw422016, res.Icon, ps)
+		components.StreamIcon(qw422016, res.Icon, 18, "", ps)
+//line views/vsearch/Result.html:22
+		qw422016.N().S(` `)
 //line views/vsearch/Result.html:22
 	}
 //line views/vsearch/Result.html:22
