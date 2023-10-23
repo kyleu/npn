@@ -3,7 +3,7 @@ source = ["./build/dist/darwin_darwin_all/npn"]
 bundle_id = "dev.npn"
 
 notarize {
-  path = "./build/dist/npn_0.1.6_darwin_all_desktop.dmg"
+  path = "./build/dist/npn_0.1.7_darwin_all_desktop.dmg"
   bundle_id = "dev.npn"
 }
 
@@ -17,10 +17,10 @@ sign {
 }
 
 dmg {
-  output_path = "./build/dist/npn_0.1.6_darwin_all.dmg"
+  output_path = "./build/dist/npn_0.1.7_darwin_all.dmg"
   volume_name = "NPN"
 }
 
 zip {
-  output_path = "./build/dist/npn_0.1.6_darwin_all_notarized.zip"
+  output_path = "./build/dist/npn_0.1.7_darwin_all_notarized.zip"
 }
