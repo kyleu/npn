@@ -6,6 +6,7 @@
   "github.com/kyleu/npn/app/lib/theme"
   "github.com/kyleu/npn/app/lib/user"
   "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/components/edit"
   "github.com/kyleu/npn/views/layout"
   "github.com/kyleu/npn/views/vauth"
   "github.com/kyleu/npn/views/vtheme"
@@ -32,7 +33,7 @@
       <div class="overflow full-width">
         <table class="mt expanded">
           <tbody>
-            {%= components.TableInput("name", "", "Name", ps.Username(), 5) %}
+            {%= edit.StringTable("name", "", "Name", ps.Username(), 5) %}
             <tr>
               <th class="shrink"><label>Mode</label></th>
               <td>

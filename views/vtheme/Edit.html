@@ -5,6 +5,7 @@
   "github.com/kyleu/npn/app/lib/theme"
   "github.com/kyleu/npn/app/util"
   "github.com/kyleu/npn/views/components"
+  "github.com/kyleu/npn/views/components/edit"
   "github.com/kyleu/npn/views/layout"
 ) %}
 
@@ -31,7 +32,7 @@
       <div class="overflow full-width">
         <table class="mt expanded">
           <tbody>
-            {%= components.TableInput("key", "", "Key", p.Theme.Key, 5) %}
+            {%= edit.StringTable("key", "", "Key", p.Theme.Key, 5) %}
           </tbody>
         </table>
       </div>
