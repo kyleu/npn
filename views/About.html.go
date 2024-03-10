@@ -105,10 +105,10 @@ func (p *About) Body(as *app.State, ps *cutil.PageState) string {
 func StreamSourceCode(qw422016 *qt422016.Writer) {
 //line views/About.html:27
 	qw422016.N().S(`
-<div class="card">
-  <h3>Source Code</h3>
-  <p>The project is available on <a href="https://github.com/kyleu/npn" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-</div>
+  <div class="card">
+    <h3>Source Code</h3>
+    <p>The project is available on <a href="https://github.com/kyleu/npn" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  </div>
 `)
 //line views/About.html:32
 }
@@ -143,10 +143,10 @@ func SourceCode() string {
 func StreamFeedback(qw422016 *qt422016.Writer) {
 //line views/About.html:34
 	qw422016.N().S(`
-<div class="card">
-  <h3>Feedback</h3>
-  <p>For now, email <a href="mailto:npn@kyleu.com">Kyle U</a></p>
-</div>
+  <div class="card">
+    <h3>Feedback</h3>
+    <p>For now, email <a href="mailto:npn@kyleu.com">Kyle U</a></p>
+  </div>
 `)
 //line views/About.html:39
 }
