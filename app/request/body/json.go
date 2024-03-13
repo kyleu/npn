@@ -18,7 +18,7 @@ func NewJSON(msg any) *Body {
 }
 
 func parseJSON(ct string, charset string, b []byte) *Body {
-	x, err := util.FromJSONInterface(b)
+	x, err := util.FromJSONAny(b)
 	if err != nil {
 		if ct == "" {
 			return NewError(err.Error())
@@ -53,7 +53,7 @@ func (j *JSON) Merge(data util.ValueMap, logger util.Logger) Config {
 	ms := util.ToJSONCompact(j.Msg)
 	if len(ms) > 0 {
 		ms = util.MergeLog("body.json.msg", ms, data, logger)
-		i, err := util.FromJSONInterface([]byte(ms))
+		i, err := util.FromJSONAny([]byte(ms))
 		if err == nil && i != nil {
 			m = i
 		}
