@@ -1,0 +1,25 @@
+// Package app - Content managed by Project Forge, see [projectforge.md] for details.
+package app
+
+import (
+	"context"
+
+	"github.com/kyleu/npn/app/lib/scripting"
+	"github.com/kyleu/npn/app/lib/websocket"
+	"github.com/kyleu/npn/app/user"
+	"github.com/kyleu/npn/app/util"
+)
+
+type CoreServices struct {
+	User   *user.Service
+	Script *scripting.Service
+	Socket *websocket.Service
+}
+
+func initCoreServices(ctx context.Context, st *State, logger util.Logger) CoreServices {
+	return CoreServices{
+		User:   user.NewService(st.Files, logger),
+		Script: scripting.NewService(st.Files, "scripts"),
+		Socket: websocket.NewService(nil, nil, nil),
+	}
+}
