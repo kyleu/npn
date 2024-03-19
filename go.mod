@@ -33,7 +33,6 @@ require (
 	github.com/rbretecher/go-postman-collection v0.9.0
 	github.com/samber/lo v1.39.0
 	github.com/spf13/afero v1.11.0
-	github.com/valyala/fasthttp v1.52.0
 	github.com/valyala/quicktemplate v1.7.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.49.0
 	go.opentelemetry.io/otel v1.24.0
