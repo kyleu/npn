@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/valyala/fasthttp"
+	"net/http"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
@@ -9,21 +9,21 @@ import (
 	"github.com/kyleu/npn/views"
 )
 
-func Workspace(rc *fasthttp.RequestCtx) {
-	Act("workspace", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func Workspace(w http.ResponseWriter, r *http.Request) {
+	Act("workspace", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		x, err := as.Services.NPN.Collection.List(&ps.Profile.ID)
 		if err != nil {
 			return "", err
 		}
 		ps.Data = x
-		return Render(rc, as, &views.Workspace{}, ps)
+		return Render(w, r, as, &views.Workspace{}, ps)
 	})
 }
 
-func Socket(rc *fasthttp.RequestCtx) {
-	Act("socket", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func Socket(w http.ResponseWriter, r *http.Request) {
+	Act("socket", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ch := util.RandomString(16)
-		err := as.Services.Socket.Upgrade(ps.Context, rc, ch, ps.User, ps.Profile, ps.Accounts, ps.Logger)
+		err := as.Services.Socket.Upgrade(ps.Context, w, r, ch, ps.User, ps.Profile, ps.Accounts, ps.Logger)
 		if err != nil {
 			ps.Logger.Warnf("unable to upgrade connection to WebSocket: %s", err.Error())
 			return "", err

@@ -2,21 +2,22 @@ package controller
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/pkg/errors"
-	"github.com/valyala/fasthttp"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
 	"github.com/kyleu/npn/app/request/imprt"
 )
 
-func ImportUpload(rc *fasthttp.RequestCtx) {
-	Act("import.upload", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
-		mpfrm, err := rc.MultipartForm()
+func ImportUpload(w http.ResponseWriter, r *http.Request) {
+	Act("import.upload", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
+		err := r.ParseMultipartForm(cutil.MaxBodySize)
 		if err != nil {
 			return "", err
 		}
+		mpfrm := r.MultipartForm
 		fileHeaders, ok := mpfrm.File["f"]
 		if !ok {
 			return "", errors.New("no file uploaded")
@@ -59,6 +60,6 @@ func ImportUpload(rc *fasthttp.RequestCtx) {
 
 		msg := fmt.Sprintf("Uploaded [%d] files", len(fileHeaders))
 		redir := "/TODO"
-		return FlashAndRedir(true, msg, redir, rc, ps)
+		return FlashAndRedir(true, msg, redir, w, ps)
 	})
 }

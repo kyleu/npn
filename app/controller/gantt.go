@@ -3,10 +3,9 @@ package controller
 import (
 	"fmt"
 	"math"
+	"net/http"
 	"strconv"
 	"strings"
-
-	"github.com/valyala/fasthttp"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
@@ -21,10 +20,10 @@ type ganttSection struct {
 	End   int    `json:"end"`
 }
 
-func Gantt(rc *fasthttp.RequestCtx) {
-	Act("gantt", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func Gantt(w http.ResponseWriter, r *http.Request) {
+	Act("gantt", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		rowHeight := 24
-		sections, completed, mode := parseGanttRequest(rc)
+		sections, completed, mode := parseGanttRequest(r)
 		pc := func(n int) float64 { return math.Floor((float64(n)/float64(completed))*10000) / 100 }
 
 		ret := make([]string, 0, len(sections)+2)
@@ -62,12 +61,12 @@ func Gantt(rc *fasthttp.RequestCtx) {
 		}
 
 		ap("</svg>")
-		return cutil.RespondMIME("", "image/svg+xml", "svg", []byte(strings.Join(ret, "")), rc)
+		return cutil.RespondMIME("", "image/svg+xml", "svg", []byte(strings.Join(ret, "")), w)
 	})
 }
 
-func parseGanttRequest(rc *fasthttp.RequestCtx) ([]*ganttSection, int, string) {
-	qps := queryparam.QueryParamsFromRaw(string(rc.URI().QueryString()))
+func parseGanttRequest(r *http.Request) ([]*ganttSection, int, string) {
+	qps := queryparam.QueryParamsFromRaw(r.URL.RawQuery)
 	width := -1
 	mode := "light"
 	ret := make([]*ganttSection, 0)

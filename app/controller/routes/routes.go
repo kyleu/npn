@@ -2,8 +2,9 @@
 package routes
 
 import (
-	"github.com/fasthttp/router"
-	"github.com/valyala/fasthttp"
+	"net/http"
+
+	"github.com/gorilla/mux"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller"
@@ -12,49 +13,54 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
+func makeRoute(x *mux.Router, method string, path string, f http.HandlerFunc) {
+	cutil.AddRoute(method, path)
+	x.HandleFunc(path, f).Methods(method)
+}
+
 //nolint:revive
-func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
-	r := router.New()
+func AppRoutes(as *app.State, logger util.Logger) (http.Handler, error) {
+	r := mux.NewRouter()
 
-	r.GET("/", controller.Home)
-	r.GET("/healthcheck", clib.Healthcheck)
-	r.GET("/about", clib.About)
+	makeRoute(r, http.MethodGet, "/", controller.Home)
+	makeRoute(r, http.MethodGet, "/healthcheck", clib.Healthcheck)
+	makeRoute(r, http.MethodGet, "/about", clib.About)
 
-	r.GET(cutil.DefaultProfilePath, clib.Profile)
-	r.POST(cutil.DefaultProfilePath, clib.ProfileSave)
-	r.GET("/auth/{key}", clib.AuthDetail)
-	r.GET("/auth/callback/{key}", clib.AuthCallback)
-	r.GET("/auth/logout/{key}", clib.AuthLogout)
-	r.GET(cutil.DefaultSearchPath, clib.Search)
+	makeRoute(r, http.MethodGet, cutil.DefaultProfilePath, clib.Profile)
+	makeRoute(r, http.MethodPost, cutil.DefaultProfilePath, clib.ProfileSave)
+	makeRoute(r, http.MethodGet, "/auth/{key}", clib.AuthDetail)
+	makeRoute(r, http.MethodGet, "/auth/callback/{key}", clib.AuthCallback)
+	makeRoute(r, http.MethodGet, "/auth/logout/{key}", clib.AuthLogout)
+	makeRoute(r, http.MethodGet, cutil.DefaultSearchPath, clib.Search)
+
 	themeRoutes(r)
 
 	// $PF_SECTION_START(routes)$
-	r.GET("/x", controller.Workspace)
-	r.GET("/a", controller.Workspace)
-	r.GET("/cfg", controller.Workspace)
-	r.GET("/help", controller.Workspace)
-	r.GET("/u", controller.Workspace)
-	r.GET("/s", controller.Workspace)
-	r.GET("/s/{_:*}", controller.Workspace)
-	r.GET("/c", controller.Workspace)
-	r.GET("/c/{_:*}", controller.Workspace)
-	r.GET("/r", controller.Workspace)
-	r.GET("/svg/gantt", controller.Gantt)
-	r.GET("/ws", controller.Socket)
+	makeRoute(r, http.MethodGet, "/x", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/a", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/cfg", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/help", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/u", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/s", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/s/{extra:.*}", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/c", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/c/{extra:.*}", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/r", controller.Workspace)
+	makeRoute(r, http.MethodGet, "/svg/gantt", controller.Gantt)
+	makeRoute(r, http.MethodGet, "/ws", controller.Socket)
 	// $PF_SECTION_END(routes)$
 
-	r.GET("/admin", clib.Admin)
+	makeRoute(r, http.MethodGet, "/admin", clib.Admin)
+	makeRoute(r, http.MethodGet, "/admin/", clib.Admin)
+	makeRoute(r, http.MethodPost, "/admin/", clib.Admin)
 	scriptingRoutes(r)
-	r.GET("/admin/{path:*}", clib.Admin)
-	r.POST("/admin/{path:*}", clib.Admin)
 
-	r.GET("/favicon.ico", clib.Favicon)
-	r.GET("/robots.txt", clib.RobotsTxt)
-	r.GET("/assets/{_:*}", clib.Static)
+	makeRoute(r, http.MethodGet, "/favicon.ico", clib.Favicon)
+	makeRoute(r, http.MethodGet, "/robots.txt", clib.RobotsTxt)
+	makeRoute(r, http.MethodGet, "/assets/{path:.*}", clib.Static)
 
-	r.OPTIONS("/", controller.Options)
-	r.OPTIONS("/{_:*}", controller.Options)
-	r.NotFound = controller.NotFoundAction
+	makeRoute(r, http.MethodOptions, "/", controller.Options)
+	r.HandleFunc("/", controller.NotFoundAction)
 
-	return clib.WireRouter(r, logger)
+	return cutil.WireRouter(r, logger)
 }
