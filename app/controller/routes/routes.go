@@ -50,9 +50,7 @@ func AppRoutes(as *app.State, logger util.Logger) (http.Handler, error) {
 	makeRoute(r, http.MethodGet, "/ws", controller.Socket)
 	// $PF_SECTION_END(routes)$
 
-	makeRoute(r, http.MethodGet, "/admin", clib.Admin)
-	makeRoute(r, http.MethodGet, "/admin/", clib.Admin)
-	makeRoute(r, http.MethodPost, "/admin/", clib.Admin)
+	adminRoutes(r)
 	scriptingRoutes(r)
 
 	makeRoute(r, http.MethodGet, "/favicon.ico", clib.Favicon)
