@@ -36,7 +36,6 @@ checksum:
     - glob: "./build/dist/*_framework.zip"
     - glob: "./build/dist/*_app.zip"
     - glob: "./build/dist/*_wasm_html.zip"
-    - glob: "./build/dist/*_notarized.zip"
     # $PF_SECTION_START(checksums)$
     # $PF_SECTION_END(checksums)$
 
@@ -84,7 +83,6 @@ release:
     - glob: "./build/dist/*_framework.zip"
     - glob: "./build/dist/*_app.zip"
     - glob: "./build/dist/*_wasm_html.zip"
-    - glob: "./build/dist/*_notarized.zip"
     # $PF_SECTION_START(releasefiles)$
     # $PF_SECTION_END(releasefiles)$
 
