@@ -96,11 +96,11 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 		components.StreamSVGRefIcon(qw422016, `cog`, ps)
 //line views/vscripting/Detail.html:35
 		qw422016.N().S(` Load Result</h3>
-    `)
+    <div class="mt">`)
 //line views/vscripting/Detail.html:36
 		components.StreamJSON(qw422016, p.LoadResult)
 //line views/vscripting/Detail.html:36
-		qw422016.N().S(`
+		qw422016.N().S(`</div>
   </div>
 `)
 //line views/vscripting/Detail.html:38
