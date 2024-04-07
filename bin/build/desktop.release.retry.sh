@@ -13,7 +13,7 @@ attempt=1
 
 while [ $attempt -le $MAX_RETRIES ]; do
     echo "Attempt $attempt of $MAX_RETRIES: $CMD"
-    ./desktop.release.sh
+    ./desktop.release.sh $1
 
     if [ $? -eq 0 ]; then
         echo "Desktop build succeeded."
