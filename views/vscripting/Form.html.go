@@ -46,7 +46,7 @@ func (p *Form) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vscripting/Form.html:18
 		qw422016.N().S(`    <h3>`)
 //line views/vscripting/Form.html:19
-		components.StreamSVGRefIcon(qw422016, `file-code`, ps)
+		components.StreamSVGRefIcon(qw422016, `file`, ps)
 //line views/vscripting/Form.html:19
 		qw422016.N().S(` New Script</h3>
 `)
@@ -64,7 +64,7 @@ func (p *Form) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 		qw422016.N().S(`]?')"><button>Delete</button></a></div>
     <h3>`)
 //line views/vscripting/Form.html:22
-		components.StreamSVGRefIcon(qw422016, `file-code`, ps)
+		components.StreamSVGRefIcon(qw422016, `file`, ps)
 //line views/vscripting/Form.html:22
 		qw422016.N().S(` Script [`)
 //line views/vscripting/Form.html:22
