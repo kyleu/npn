@@ -5,6 +5,7 @@
   "github.com/kyleu/npn/app"
   "github.com/kyleu/npn/app/controller/cutil"
   "github.com/kyleu/npn/app/util"
+  "github.com/kyleu/npn/views/components"
   "github.com/kyleu/npn/views/layout"
 ) %}
 
@@ -15,7 +16,7 @@
 
 {% func (p *Logs) Body(as *app.State, ps *cutil.PageState) %}
   <div class="card">
-    <h3>Recent Logs</h3>
+    <h3>{%= components.SVGRefIcon(`filter`, ps) %}Recent Logs</h3>
     {%= logTable(p.Logs) %}
   </div>
 {% endfunc %}
