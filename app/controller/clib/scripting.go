@@ -18,7 +18,7 @@ func ScriptingList(w http.ResponseWriter, r *http.Request) {
 	controller.Act("scripting.list", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ret, sizes := as.Services.Script.ListScriptSizes(ps.Logger)
 		ps.SetTitleAndData("Scripting", ret)
-		return controller.Render(w, r, as, &vscripting.List{Scripts: ret, Sizes: sizes}, ps, "scripting")
+		return controller.Render(r, as, &vscripting.List{Scripts: ret, Sizes: sizes}, ps, "scripting")
 	})
 }
 
@@ -45,14 +45,14 @@ func ScriptingDetail(w http.ResponseWriter, r *http.Request) {
 		page.Results = res
 		ps.Title = key
 		ps.Data = map[string]any{"script": src, "results": res}
-		return controller.Render(w, r, as, page, ps, "scripting", key)
+		return controller.Render(r, as, page, ps, "scripting", key)
 	})
 }
 
 func ScriptingNew(w http.ResponseWriter, r *http.Request) {
 	controller.Act("scripting.new", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ps.Title = "New Script"
-		return controller.Render(w, r, as, &vscripting.Form{}, ps, "scripting", "New")
+		return controller.Render(r, as, &vscripting.Form{}, ps, "scripting", "New")
 	})
 }
 
@@ -74,7 +74,7 @@ func ScriptingCreate(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return "", err
 		}
-		return controller.FlashAndRedir(true, "Scripting created", "/admin/scripting/"+url.QueryEscape(pth), w, ps)
+		return controller.FlashAndRedir(true, "Scripting created", "/admin/scripting/"+url.QueryEscape(pth), ps)
 	})
 }
 
@@ -89,7 +89,7 @@ func ScriptingForm(w http.ResponseWriter, r *http.Request) {
 			return "", err
 		}
 		ps.SetTitleAndData("Edit ["+key+"]", sc)
-		return controller.Render(w, r, as, &vscripting.Form{Path: key, Content: sc}, ps, "scripting", key, "Edit")
+		return controller.Render(r, as, &vscripting.Form{Path: key, Content: sc}, ps, "scripting", key, "Edit")
 	})
 }
 
@@ -111,7 +111,7 @@ func ScriptingSave(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return "", err
 		}
-		return controller.FlashAndRedir(true, "Scripting saved", "/admin/scripting/"+url.QueryEscape(key), w, ps)
+		return controller.FlashAndRedir(true, "Scripting saved", "/admin/scripting/"+url.QueryEscape(key), ps)
 	})
 }
 
@@ -125,6 +125,6 @@ func ScriptingDelete(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return "", err
 		}
-		return controller.FlashAndRedir(true, "Script deleted", "/admin/scripting", w, ps)
+		return controller.FlashAndRedir(true, "Script deleted", "/admin/scripting", ps)
 	})
 }

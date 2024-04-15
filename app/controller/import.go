@@ -60,6 +60,6 @@ func ImportUpload(w http.ResponseWriter, r *http.Request) {
 
 		msg := fmt.Sprintf("Uploaded [%d] files", len(fileHeaders))
 		redir := "/TODO"
-		return FlashAndRedir(true, msg, redir, w, ps)
+		return FlashAndRedir(true, msg, redir, ps)
 	})
 }

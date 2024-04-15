@@ -19,6 +19,6 @@ var homeContent = util.ValueMap{
 func Home(w http.ResponseWriter, r *http.Request) {
 	Act("home", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ps.Data = homeContent
-		return Render(w, r, as, &views.Workspace{}, ps)
+		return Render(r, as, &views.Workspace{}, ps)
 	})
 }

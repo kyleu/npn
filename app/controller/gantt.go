@@ -61,7 +61,7 @@ func Gantt(w http.ResponseWriter, r *http.Request) {
 		}
 
 		ap("</svg>")
-		return cutil.RespondMIME("", "image/svg+xml", "svg", []byte(strings.Join(ret, "")), w)
+		return cutil.RespondMIME("", "image/svg+xml", "svg", []byte(strings.Join(ret, "")), ps.W)
 	})
 }
 

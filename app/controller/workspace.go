@@ -16,7 +16,7 @@ func Workspace(w http.ResponseWriter, r *http.Request) {
 			return "", err
 		}
 		ps.Data = x
-		return Render(w, r, as, &views.Workspace{}, ps)
+		return Render(r, as, &views.Workspace{}, ps)
 	})
 }
 
