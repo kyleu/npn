@@ -28,6 +28,7 @@ require (
 	github.com/mileusna/useragent v1.3.4
 	github.com/muesli/coral v1.0.0
 	github.com/muesli/gamut v0.3.1
+	github.com/pelletier/go-toml v1.9.5
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.19.0
 	github.com/rbretecher/go-postman-collection v0.9.0
