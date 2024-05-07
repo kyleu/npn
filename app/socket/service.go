@@ -2,8 +2,6 @@ package socket
 
 import (
 	"context"
-	"encoding/json"
-
 	"github.com/pkg/errors"
 
 	"github.com/kyleu/npn/app/call"
@@ -32,12 +30,12 @@ func NewService(
 	us *user.Service, ss *session.Service, co *collection.Service, rq *request.Service, cl *call.Service, sr *search.Service, im *imprt.Service,
 ) *Service {
 	ret := &Service{User: us, Session: ss, Collection: co, Request: rq, Caller: cl, Search: sr, Import: im}
-	ret.Socket = websocket.NewService(ret.onOpen, ret.handler, nil)
+	ret.Socket = websocket.NewService(ret.onOpen, nil)
 	return ret
 }
 
-func (s *Service) handler(
-	ctx context.Context, ws *websocket.Service, c *websocket.Connection, svc string, cmd string, param json.RawMessage, logger util.Logger,
+func (s *Service) Handler(
+	ctx context.Context, ws *websocket.Service, c *websocket.Connection, svc string, cmd string, param []byte, logger util.Logger,
 ) error {
 	var err error
 	switch svc {

@@ -23,7 +23,7 @@ func Workspace(w http.ResponseWriter, r *http.Request) {
 func Socket(w http.ResponseWriter, r *http.Request) {
 	Act("socket", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ch := util.RandomString(16)
-		err := as.Services.Socket.Upgrade(ps.Context, w, r, ch, ps.User, ps.Profile, ps.Accounts, ps.Logger)
+		_, err := as.Services.Socket.Upgrade(ps.Context, w, r, ch, ps.User, ps.Profile, ps.Accounts, as.Services.NPN.Handler, ps.Logger)
 		if err != nil {
 			ps.Logger.Warnf("unable to upgrade connection to WebSocket: %s", err.Error())
 			return "", err

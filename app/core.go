@@ -21,6 +21,6 @@ func initCoreServices(ctx context.Context, st *State, logger util.Logger) CoreSe
 	return CoreServices{
 		User:   user.NewService(st.Files, logger),
 		Script: scripting.NewService(st.Files, "scripts"),
-		Socket: websocket.NewService(nil, nil, nil),
+		Socket: websocket.NewService(nil, nil),
 	}
 }
