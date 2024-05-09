@@ -32,7 +32,6 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.19.0
 	github.com/rbretecher/go-postman-collection v0.9.0
-	github.com/robert-nix/ansihtml v1.0.1
 	github.com/samber/lo v1.39.0
 	github.com/spf13/afero v1.11.0
 	github.com/valyala/quicktemplate v1.7.0
