@@ -174,7 +174,7 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 	qw422016.N().S(`App Profiling</h3>
     `)
 //line views/vadmin/Settings.html:52
-	streamsettingsLink(qw422016, "/admin/memusage", "cog", "Memory Usage", "Detailed memory usage statistics", ps)
+	streamsettingsLink(qw422016, "/admin/memusage", "cog", "Memory Usage", "Detailed memory usage statistics for this application", ps)
 //line views/vadmin/Settings.html:52
 	qw422016.N().S(`
     `)
