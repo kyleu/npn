@@ -52,7 +52,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 	qw422016.N().S(`/edit"><button type="button">Edit</button></a></div>
     <h3>`)
 //line views/vscripting/Detail.html:24
-	components.StreamSVGRefIcon(qw422016, `file`, ps)
+	components.StreamSVGIcon(qw422016, `file`, ps)
 //line views/vscripting/Detail.html:24
 	qw422016.N().S(` `)
 //line views/vscripting/Detail.html:24
@@ -94,7 +94,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 		qw422016.N().S(`  <div class="card">
     <h3>`)
 //line views/vscripting/Detail.html:36
-		components.StreamSVGRefIcon(qw422016, `cog`, ps)
+		components.StreamSVGIcon(qw422016, `cog`, ps)
 //line views/vscripting/Detail.html:36
 		qw422016.N().S(` Load Error</h3>
     <div class="mt error">`)
@@ -114,7 +114,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 		qw422016.N().S(`  <div class="card">
     <h3>`)
 //line views/vscripting/Detail.html:42
-		components.StreamSVGRefIcon(qw422016, `cog`, ps)
+		components.StreamSVGIcon(qw422016, `cog`, ps)
 //line views/vscripting/Detail.html:42
 		qw422016.N().S(` Load Result</h3>
     <div class="mt">`)
@@ -141,7 +141,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 			qw422016.N().S(`    <div class="card">
       <h3>`)
 //line views/vscripting/Detail.html:50
-			components.StreamSVGRefIcon(qw422016, `play`, ps)
+			components.StreamSVGIcon(qw422016, `play`, ps)
 //line views/vscripting/Detail.html:50
 			qw422016.N().S(` [`)
 //line views/vscripting/Detail.html:50
