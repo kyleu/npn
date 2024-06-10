@@ -48,7 +48,7 @@ func (p *Form) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vscripting/Form.html:19
 		components.StreamSVGIcon(qw422016, `file`, ps)
 //line views/vscripting/Form.html:19
-		qw422016.N().S(` New Script</h3>
+		qw422016.N().S(`New Script</h3>
 `)
 //line views/vscripting/Form.html:20
 	} else {
@@ -70,7 +70,7 @@ func (p *Form) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vscripting/Form.html:22
 		components.StreamSVGIcon(qw422016, `file`, ps)
 //line views/vscripting/Form.html:22
-		qw422016.N().S(` Script [`)
+		qw422016.N().S(`Script [`)
 //line views/vscripting/Form.html:22
 		qw422016.E().S(p.Path)
 //line views/vscripting/Form.html:22

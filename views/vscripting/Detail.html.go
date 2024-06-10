@@ -54,8 +54,6 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 //line views/vscripting/Detail.html:24
 	components.StreamSVGIcon(qw422016, `file`, ps)
 //line views/vscripting/Detail.html:24
-	qw422016.N().S(` `)
-//line views/vscripting/Detail.html:24
 	qw422016.E().S(p.Path)
 //line views/vscripting/Detail.html:24
 	qw422016.N().S(`</h3>
@@ -96,7 +94,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 //line views/vscripting/Detail.html:36
 		components.StreamSVGIcon(qw422016, `cog`, ps)
 //line views/vscripting/Detail.html:36
-		qw422016.N().S(` Load Error</h3>
+		qw422016.N().S(`Load Error</h3>
     <div class="mt error">`)
 //line views/vscripting/Detail.html:37
 		qw422016.E().S(p.LoadError.Error())
@@ -116,7 +114,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 //line views/vscripting/Detail.html:42
 		components.StreamSVGIcon(qw422016, `cog`, ps)
 //line views/vscripting/Detail.html:42
-		qw422016.N().S(` Load Result</h3>
+		qw422016.N().S(`Load Result</h3>
     <div class="mt">`)
 //line views/vscripting/Detail.html:43
 		components.StreamJSON(qw422016, p.LoadResult)
@@ -143,7 +141,7 @@ func (p *Detail) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.
 //line views/vscripting/Detail.html:50
 			components.StreamSVGIcon(qw422016, `play`, ps)
 //line views/vscripting/Detail.html:50
-			qw422016.N().S(` [`)
+			qw422016.N().S(`[`)
 //line views/vscripting/Detail.html:50
 			qw422016.E().S(f)
 //line views/vscripting/Detail.html:50
