@@ -20,7 +20,6 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.3
-	github.com/iancoleman/strcase v0.2.0
 	github.com/json-iterator/go v1.1.12
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
 	github.com/markbates/going v1.0.3
