@@ -45,7 +45,7 @@ func (p *List) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vscripting/List.html:19
 	components.StreamSVGIcon(qw422016, `cog`, ps)
 //line views/vscripting/List.html:19
-	qw422016.N().S(`Scripts</h3>
+	qw422016.N().S(` Scripts</h3>
     <div class="mt">
       <div class="overflow full-width">
         <table class="min-200">
