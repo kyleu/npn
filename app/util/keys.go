@@ -11,6 +11,7 @@ const (
 	AppSource  = "https://github.com/kyleu/npn"
 	AppLegal   = `Built by <a href="mailto:npn@kyleu.com">Kyle U</a>, all rights reserved`
 
+	KeyDebug   = "debug"
 	KeyError   = "error"
 	KeyRandom  = "random"
 	KeyUnknown = "unknown"
