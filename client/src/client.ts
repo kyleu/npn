@@ -1,4 +1,3 @@
-// Content managed by Project Forge, see [projectforge.md] for details.
 import "./client.css";
 import {audit} from "./audit";
 import {menuInit} from "./menu";

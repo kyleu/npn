@@ -1,4 +1,3 @@
-<!--- Content managed by Project Forge, see [projectforge.md] for details. -->
 # Releasing
 
 NPN uses `goreleaser` to create build artifacts.

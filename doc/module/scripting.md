@@ -1,4 +1,3 @@
-<!--- Content managed by Project Forge, see [projectforge.md] for details. -->
 # Process
 
 This is a module for [Project Forge](https://projectforge.dev). It allows the execution of JavaScript files using a built-in interpreter.
