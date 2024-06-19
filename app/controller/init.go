@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"github.com/kyleu/npn/app/lib/user"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
@@ -10,6 +11,12 @@ import (
 
 // Initialize app-specific system dependencies.
 func initApp(_ context.Context, _ *app.State, _ util.Logger) error {
+	user.SetPermissions(false,
+		user.Perm("/admin", "github:kyleu.com", true),
+		user.Perm("/admin", "github:npn.dev", true),
+		user.Perm("/admin", "*", false),
+		user.Perm("/", "*", true),
+	)
 	return nil
 }
 
