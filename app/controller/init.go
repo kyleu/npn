@@ -2,10 +2,10 @@ package controller
 
 import (
 	"context"
-	"github.com/kyleu/npn/app/lib/user"
 
 	"github.com/kyleu/npn/app"
 	"github.com/kyleu/npn/app/controller/cutil"
+	"github.com/kyleu/npn/app/lib/user"
 	"github.com/kyleu/npn/app/util"
 )
 
