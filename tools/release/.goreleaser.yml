@@ -1,4 +1,6 @@
 # http://goreleaser.com
+version: 2
+
 project_name: npn
 
 archives:
@@ -15,7 +17,7 @@ brews:
     commit_author:
       name: "Kyle U"
       email: "npn@kyleu.com"
-    folder: Formula
+    directory: Formula
     homepage: "https://github.com/kyleu/npn"
     description: "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app."
     license: "MIT"
