@@ -9,6 +9,10 @@ cd "$dir/.."
 # $PF_SECTION_START(keys)$
 # $PF_SECTION_END(keys)$
 
+if command -v title &> /dev/null; then
+  title "npn"
+fi
+
 [[ -f "$HOME/bin/oauth" ]] && . "$HOME/bin/oauth"
 export npn_encryption_key=TEMP_SECRET_KEY
 
