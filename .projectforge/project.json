@@ -2,7 +2,7 @@
   "key": "npn",
   "name": "NPN",
   "icon": "npn",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "package": "github.com/kyleu/npn",
   "port": 19000,
   "modules": [
