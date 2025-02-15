@@ -1,8 +1,6 @@
 module github.com/kyleu/npn
 
-go 1.22.7
-
-toolchain go1.22.9
+go 1.24.0
 
 require (
 	github.com/CAFxX/httpcompression v0.0.9
