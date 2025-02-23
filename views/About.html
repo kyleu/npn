@@ -1,5 +1,6 @@
-<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
 {% import (
+  "time"
+
   "github.com/kyleu/npn/app"
   "github.com/kyleu/npn/app/controller/cutil"
   "github.com/kyleu/npn/app/util"
@@ -8,18 +9,20 @@
   "github.com/kyleu/npn/views/layout"
 ) %}
 
-{% code type About struct { layout.Basic } %}
+{% code type About struct {
+  layout.Basic
+  Version string
+  Started time.Time
+} %}
 
 {% func (p *About) Body(as *app.State, ps *cutil.PageState) %}
   <div class="card">
-    <h3>{%= components.SVGIcon(`app`, ps) %}{%s util.AppName %}</h3>
-    <em>v{%s as.BuildInfo.Version %}, started {%= view.TimestampRelative(&as.Started, false) %}</em>
+    <h3>{%= components.SVGIcon(`app`, ps) %} {%s util.AppName %}</h3>
+    <em>v{%s p.Version %}, started {%= view.TimestampRelative(&p.Started, false) %}</em>
   </div>
   <div class="card">
     <h3>About</h3>
-    {%- comment %}$PF_SECTION_START(about)${% endcomment -%}
     <p>Coming soon...</p>
-    {%- comment %}$PF_SECTION_END(about)${% endcomment -%}
   </div>
   {%= SourceCode() %}
   {%= Feedback() %}
