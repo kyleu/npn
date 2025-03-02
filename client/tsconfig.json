@@ -9,6 +9,7 @@
     "importsNotUsedAsValues": "error",
     "listFiles": false,
     "module": "none",
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
