@@ -15,7 +15,7 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outFile": "../assets/npn.js",
+    "outFile": "../assets/client.js",
     "removeComments": true,
     "preserveConstEnums": true,
     "preserveWatchOutput": true,
