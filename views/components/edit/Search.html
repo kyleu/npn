@@ -2,6 +2,7 @@
   "strings"
 
   "github.com/kyleu/npn/app/controller/cutil"
+  "github.com/kyleu/npn/app/util"
   "github.com/kyleu/npn/views/components"
 ) %}
 
@@ -19,7 +20,7 @@
       if ok {
         curr += ","
       }
-      curr += strings.Join(v, ",")
+      curr += util.StringJoin(v, ",")
       m[k] = curr
   }
   %}
