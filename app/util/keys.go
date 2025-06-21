@@ -5,6 +5,7 @@ const (
 	AppName    = "NPN"
 	AppSummary = "NPN helps you explore and test HTTP services, with a focus on speed and correctness."
 	AppPort    = 19000
+	AppCmd     = AppKey
 	AppContact = "Kyle U <npn@kyleu.com>"
 	AppURL     = "https://github.com/kyleu/npn"
 	AppSource  = "https://github.com/kyleu/npn"
