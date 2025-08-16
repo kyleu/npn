@@ -1,7 +1,7 @@
 // Content managed by Project Forge, see [projectforge.md] for details.
 module github.com/kyleu/npn/tools/desktop
 
-go 1.24.4
+go 1.25.0
 
 require (
 	github.com/kyleu/npn v0.0.0
