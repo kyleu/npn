@@ -6,7 +6,6 @@
     "alwaysStrict": true,
     "declaration": true,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
     "listFiles": false,
     "module": "none",
     "moduleResolution": "node",
