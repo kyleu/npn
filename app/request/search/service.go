@@ -2,6 +2,7 @@ package search
 
 import (
 	"github.com/google/uuid"
+
 	"github.com/kyleu/npn/app/request"
 	"github.com/kyleu/npn/app/request/collection"
 	"github.com/kyleu/npn/app/util"
