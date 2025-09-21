@@ -25,7 +25,8 @@ var Default = func() *Theme {
 	}
 
 	return &Theme{
-		Key: "default",
+		Key:  "default",
+		Base: "#193441",
 		Light: &Colors{
 			Border: "1px solid #cccccc", LinkDecoration: "none",
 			Foreground: "#000000", ForegroundMuted: "#1f3039",
