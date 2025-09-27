@@ -15,22 +15,22 @@ import (
 	"github.com/kyleu/npn/app/util"
 )
 
-func OpenAPI2Import(data []byte) (*openapi3.Swagger, error) {
-	x := &openapi2.Swagger{}
+func OpenAPI2Import(data []byte) (*openapi3.T, error) {
+	x := &openapi2.T{}
 	err := yaml.Unmarshal(data, x)
 	if err != nil {
 		return nil, err
 	}
-	swag, err := openapi2conv.ToV3Swagger(x)
+	swag, err := openapi2conv.ToV3(x)
 	return swag, err
 }
 
-func OpenAPI3Import(data []byte) (*openapi3.Swagger, error) {
-	swag, err := openapi3.NewSwaggerLoader().LoadSwaggerFromData(data)
+func OpenAPI3Import(data []byte) (*openapi3.T, error) {
+	swag, err := openapi3.NewLoader().LoadFromData(data)
 	return swag, err
 }
 
-func OpenAPIToFullCollection(swag *openapi3.Swagger) (*collection.FullCollection, error) {
+func OpenAPIToFullCollection(swag *openapi3.T) (*collection.FullCollection, error) {
 	coll := openAPIToCollection(swag.Info)
 	reqs, sess, err := openAPIToRequests(swag)
 	if err != nil {
@@ -41,7 +41,7 @@ func OpenAPIToFullCollection(swag *openapi3.Swagger) (*collection.FullCollection
 	return ret, nil
 }
 
-func openAPIToRequests(swag *openapi3.Swagger) (request.Requests, *session.Session, error) {
+func openAPIToRequests(swag *openapi3.T) (request.Requests, *session.Session, error) {
 	reqs := make(request.Requests, 0)
 	sess := &session.Session{}
 
@@ -52,7 +52,7 @@ func openAPIToRequests(swag *openapi3.Swagger) (request.Requests, *session.Sessi
 
 	proto := request.PrototypeFromString(url)
 
-	for k, p := range swag.Paths {
+	for k, p := range swag.Paths.Map() {
 		newReqs, err := openAPIPathToRequests(k, p, proto)
 		if err != nil {
 			return nil, nil, err
