@@ -39,8 +39,7 @@
     "summary": "NPN helps you explore and test HTTP services, with a focus on speed and correctness.",
     "description": "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app.",
     "bundle": "dev.npn",
-    "signingIdentity": "Developer ID Application: Kyle Unverferth (C6S478FYLD)",
-    "notarizeEmail": "kyle@kyleu.com",
+    "signingIdentity": "${APPLE_SIGNING_IDENTITY}",
     "javaPackage": "dev.npn"
   },
   "theme": {

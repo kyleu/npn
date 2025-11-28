@@ -46,8 +46,8 @@ cp -R "./template/darwin/icons.icns" "./NPN.app/Contents/Resources/icons.icns"
 cp "npn.darwin" "./NPN.app/Contents/MacOS/npn"
 
 echo "signing amd64 desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app/Contents/MacOS/npn"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app/Contents/MacOS/npn"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app"
 
 cp "./template/darwin/appdmg.config.json" "./appdmg.config.json"
 
@@ -59,8 +59,8 @@ zip -r "npn_${TGT}_darwin_amd64_desktop.zip" "./NPN.app"
 cp "npn.darwin.arm64" "./NPN.app/Contents/MacOS/npn"
 
 echo "signing arm64 desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app/Contents/MacOS/npn"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app/Contents/MacOS/npn"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app"
 
 echo "building macOS arm64 DMG..."
 appdmg "appdmg.config.json" "./npn_${TGT}_darwin_arm64_desktop.dmg"
@@ -71,8 +71,8 @@ rm "./NPN.app/Contents/MacOS/npn"
 lipo -create -output "./NPN.app/Contents/MacOS/npn" npn.darwin npn.darwin.arm64
 
 echo "signing universal desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app/Contents/MacOS/npn"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./NPN.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app/Contents/MacOS/npn"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./NPN.app"
 
 echo "building macOS universal DMG..."
 appdmg "appdmg.config.json" "./npn_${TGT}_darwin_all_desktop.dmg"
