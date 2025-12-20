@@ -1,8 +1,6 @@
 .DS_Store
 /.env
-/.vscode
 /.idea
-/.scannerwork
 /assets/vendor/*.map
 /build
 /client/node_modules
