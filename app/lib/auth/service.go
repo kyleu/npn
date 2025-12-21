@@ -1,8 +1,6 @@
 package auth
 
-import (
-	"github.com/kyleu/npn/app/util"
-)
+import "github.com/kyleu/npn/app/util"
 
 type Service struct {
 	baseURL   string

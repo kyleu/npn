@@ -1,8 +1,6 @@
 package session
 
-import (
-	"github.com/kyleu/npn/app/request/header"
-)
+import "github.com/kyleu/npn/app/request/header"
 
 type Summary struct {
 	Key           string `json:"key"`

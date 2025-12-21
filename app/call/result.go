@@ -1,8 +1,6 @@
 package call
 
-import (
-	"github.com/google/uuid"
-)
+import "github.com/google/uuid"
 
 type Result struct {
 	ID         uuid.UUID `json:"id,omitempty"`

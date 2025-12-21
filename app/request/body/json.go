@@ -1,8 +1,6 @@
 package body
 
-import (
-	"github.com/kyleu/npn/app/util"
-)
+import "github.com/kyleu/npn/app/util"
 
 const KeyJSON = "json"
 

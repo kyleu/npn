@@ -1,8 +1,6 @@
 package auth
 
-import (
-	"fmt"
-)
+import "fmt"
 
 const KeyBasic = "basic"
 
