@@ -63,7 +63,7 @@ require (
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
-	github.com/golang/geo v0.0.0-20251209161508-25c597310d4b // indirect
+	github.com/golang/geo v0.0.0-20251218194845-df15212eaefe // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/pprof v0.0.0-20251213031049-b05bdaca462f // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3 // indirect
