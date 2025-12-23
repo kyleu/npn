@@ -17,7 +17,7 @@ func PrototypeFromURL(u *url.URL) *Prototype {
 		a := auth.NewBasic(u.User.Username(), p, false)
 		at = a
 	}
-	domain, portString := util.StringSplit(u.Host, ':', true)
+	domain, portString := util.StringCut(u.Host, ':', true)
 
 	port := 0
 	if len(portString) > 0 {
@@ -39,34 +39,34 @@ func PrototypeFromURL(u *url.URL) *Prototype {
 func PrototypeFromString(u string) *Prototype {
 	var at *auth.Auth
 
-	rest, frag := util.StringSplit(u, '#', true)
+	rest, frag := util.StringCut(u, '#', true)
 	if len(frag) > 0 {
 		frag, _ = url.QueryUnescape(frag)
 	}
-	rest, query := util.StringSplit(rest, '?', true)
-	proto, rest := util.StringSplit(rest, ':', true)
+	rest, query := util.StringCut(rest, '?', true)
+	proto, rest := util.StringCut(rest, ':', true)
 	if rest == "" {
 		rest = proto
 		proto = "http"
 	}
 	rest = strings.TrimPrefix(strings.TrimPrefix(rest, "/"), "/")
-	rest, path := util.StringSplit(rest, '/', true)
+	rest, path := util.StringCut(rest, '/', true)
 	if len(path) > 0 {
 		path, _ = url.PathUnescape(path)
 	}
-	aut, host := util.StringSplit(rest, '@', true)
+	aut, host := util.StringCut(rest, '@', true)
 	if host == "" {
 		host = aut
 		aut = ""
 	}
-	host, portString := util.StringSplit(host, ':', true)
+	host, portString := util.StringCut(host, ':', true)
 	port := 0
 	if len(portString) > 0 {
 		port, _ = strconv.Atoi(portString)
 	}
 
 	if aut != "" {
-		user, pass := util.StringSplit(aut, ':', true)
+		user, pass := util.StringCut(aut, ':', true)
 		a := auth.NewBasic(user, pass, false)
 		at = a
 	}

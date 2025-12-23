@@ -69,7 +69,7 @@ func QueryParamsFromRaw(s string) QueryParams {
 	parts := strings.Split(s, "&")
 	for _, x := range parts {
 		if len(x) > 0 {
-			k, v := util.StringSplit(x, '=', true)
+			k, v := util.StringCut(x, '=', true)
 			k, _ = url.QueryUnescape(k)
 			v, _ = url.QueryUnescape(v)
 			ret = append(ret, &QueryParam{Key: k, Value: v})

@@ -24,7 +24,7 @@ func Parse(path string, contentEncoding string, contentType string, charset stri
 
 	var b []byte
 	var err error
-	contentEncoding, _ = util.StringSplitLast(contentEncoding, ';', true)
+	contentEncoding, _ = util.StringCutLast(contentEncoding, ';', true)
 	switch contentEncoding {
 	case "", "identity":
 		b, err = ioutil.ReadAll(rd)

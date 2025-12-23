@@ -88,7 +88,7 @@ func parseGanttRequest(r *http.Request) ([]*ganttSection, int, string) {
 			mode = qp.Value
 		}
 		if strings.Contains(qp.Key, ".") {
-			k, t := util.StringSplitLast(qp.Key, '.', true)
+			k, t := util.StringCutLast(qp.Key, '.', true)
 			sec := get(k)
 			switch t {
 			case "g":

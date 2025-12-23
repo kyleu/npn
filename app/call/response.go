@@ -79,7 +79,7 @@ func ResponseFromHTTP(p *request.Prototype, r *http.Response, sess *session.Sess
 }
 
 func parseCT(h string) (string, string) {
-	ct, cs := util.StringSplit(h, ';', true)
+	ct, cs := util.StringCut(h, ';', true)
 	cs = strings.TrimSpace(strings.TrimPrefix(strings.TrimPrefix(strings.TrimSpace(cs), "charset"), "="))
 	return strings.TrimSpace(ct), cs
 }
