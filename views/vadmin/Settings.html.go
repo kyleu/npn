@@ -106,7 +106,7 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 	qw422016.N().S(` Admin Functions</h3>
     `)
 //line views/vadmin/Settings.html:35
-	streamsettingsLink(qw422016, "/admin/server", "archive", "App Information", "All sorts of info about the server and runtime", ps)
+	streamsettingsLink(qw422016, "/admin/server", "list", "App Information", "All sorts of info about the server and runtime", ps)
 //line views/vadmin/Settings.html:35
 	qw422016.N().S(`
     `)
@@ -116,12 +116,12 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:37
-	streamsettingsLink(qw422016, "/theme", "archive", "Edit Themes", "Configure the design themes available to end users", ps)
+	streamsettingsLink(qw422016, "/theme", "theme", "Edit Themes", "Configure the design themes available to end users", ps)
 //line views/vadmin/Settings.html:37
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:38
-	streamsettingsLink(qw422016, "/admin/scripting", "archive", "Script Files", "View and run the JavaScript files managed by the server", ps)
+	streamsettingsLink(qw422016, "/admin/scripting", "file-code", "Script Files", "View and run the JavaScript files managed by the server", ps)
 //line views/vadmin/Settings.html:38
 	qw422016.N().S(`
     `)
@@ -159,7 +159,7 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:48
-	streamsettingsLink(qw422016, "/admin/sockets", "cog", "Active WebSockets", "Manage the active WebSockets in this server", ps)
+	streamsettingsLink(qw422016, "/admin/sockets", "satellite", "Active WebSockets", "Manage the active WebSockets in this server", ps)
 //line views/vadmin/Settings.html:48
 	qw422016.N().S(`
     <div class="clear"></div>
@@ -177,22 +177,22 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:54
-	streamsettingsLink(qw422016, "/admin/gc", "cog", "Collect Garbage", "Runs the Go garbage collector", ps)
+	streamsettingsLink(qw422016, "/admin/gc", "fire", "Collect Garbage", "Runs the Go garbage collector", ps)
 //line views/vadmin/Settings.html:54
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:55
-	streamsettingsLink(qw422016, "/admin/heap", "cog", "Write Memory Dump", "Writes a memory dump to <em>./tmp/mem.pprof</em>, use script to view", ps)
+	streamsettingsLink(qw422016, "/admin/heap", "file-archive", "Write Memory Dump", "Writes a memory dump to <em>./tmp/mem.pprof</em>, use script to view", ps)
 //line views/vadmin/Settings.html:55
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:56
-	streamsettingsLink(qw422016, "/admin/cpu/start", "cog", "Start CPU Profile", "Profiles the CPU using <em>./tmp/cpu.pprof</em>, use script to view", ps)
+	streamsettingsLink(qw422016, "/admin/cpu/start", "play", "Start CPU Profile", "Profiles the CPU using <em>./tmp/cpu.pprof</em>, use script to view", ps)
 //line views/vadmin/Settings.html:56
 	qw422016.N().S(`
     `)
 //line views/vadmin/Settings.html:57
-	streamsettingsLink(qw422016, "/admin/cpu/stop", "cog", "Stop CPU Profile", "Stops the active CPU profile", ps)
+	streamsettingsLink(qw422016, "/admin/cpu/stop", "stop", "Stop CPU Profile", "Stops the active CPU profile", ps)
 //line views/vadmin/Settings.html:57
 	qw422016.N().S(`
     <div class="clear"></div>
