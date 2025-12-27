@@ -16,7 +16,7 @@
     {
       "mode": "auto",
       "name": "Start NPN",
-      "program": "NPN",
+      "program": "main.go",
       "request": "launch",
       "substitutePath": [
         {
@@ -31,8 +31,8 @@
         "upgrade"
       ],
       "mode": "auto",
-      "name": "Start NPN",
-      "program": "NPN",
+      "name": "Upgrade NPN",
+      "program": "main.go",
       "request": "launch",
       "substitutePath": [
         {
