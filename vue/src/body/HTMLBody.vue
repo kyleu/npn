@@ -28,7 +28,7 @@ export default class HTMLBody extends Vue {
 
   mode = "text";
 
-  editor?: Editor
+  editor?: Editor;
 
   refresh(): void {
     const e = this.editor;

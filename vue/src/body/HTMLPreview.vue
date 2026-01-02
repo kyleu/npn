@@ -34,8 +34,8 @@ export function renderHTMLPreview(iframe: HTMLIFrameElement, html: string, baseU
 
 @Component
 export default class HTMLPreview extends Vue {
-  @Prop() html!: string
-  @Prop() url!: string
+  @Prop() html!: string;
+  @Prop() url!: string;
 
   mounted(): void {
     if (this.html) {

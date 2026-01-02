@@ -11,10 +11,10 @@ import {Editor, editorFor} from "@/util/editor";
 
 @Component({ components: { FormEditor } })
 export default class CodeEditor extends Vue {
-  @Prop() language!: string
-  @Prop() value!: string
+  @Prop() language!: string;
+  @Prop() value!: string;
 
-  editor?: Editor
+  editor?: Editor;
 
   refresh(): void {
     const e = this.editor;

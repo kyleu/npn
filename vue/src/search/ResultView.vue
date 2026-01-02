@@ -21,8 +21,8 @@ import {logError} from "@/util/log";
 
 @Component({ components: { Icon } })
 export default class ResultView extends Vue {
-  @Prop() q!: SearchResult
-  @Prop() r!: SearchResult
+  @Prop() q!: SearchResult;
+  @Prop() r!: SearchResult;
 
   get url(): string {
     switch(this.r.t) {

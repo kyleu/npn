@@ -13,9 +13,9 @@ import {Editor, editorFor} from "@/util/editor";
 
 @Component
 export default class JSONBody extends Vue {
-  @Prop() config!: JSONConfig
+  @Prop() config!: JSONConfig;
 
-  editor?: Editor
+  editor?: Editor;
 
   refresh(): void {
     const e = this.editor;

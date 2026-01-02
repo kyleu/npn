@@ -31,7 +31,7 @@ import {requestResultsRef} from "@/call/state";
 
 @Component({ components: {Icon} })
 export default class URLEditor extends Vue {
-  private e = false
+  private e = false;
 
   get editing(): boolean {
     return this.e;

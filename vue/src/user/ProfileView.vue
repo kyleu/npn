@@ -42,7 +42,7 @@ import {clientCommands} from "@/util/command";
 
 @Component({ components: { Theme } })
 export default class ProfileView extends Vue {
-  original: Profile | undefined = jsonClone(profileRef.value)
+  original: Profile | undefined = jsonClone(profileRef.value);
 
   get themes(): ThemeColors[] {
     return allThemes;

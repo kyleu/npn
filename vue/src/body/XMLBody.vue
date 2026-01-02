@@ -12,9 +12,9 @@ import {Editor, editorFor} from "@/util/editor";
 
 @Component
 export default class XMLBody extends Vue {
-  @Prop() config!: XMLConfig
+  @Prop() config!: XMLConfig;
 
-  editor?: Editor
+  editor?: Editor;
 
   refresh(): void {
     const e = this.editor;
