@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>npn</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta property="og:title" content="npn">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+
+  <link rel="icon" href="/favicon.ico">
+  <script>
+    window.initialData = {
+      host: "localhost:10101",
+      profile: {
+        userID: "00000000-0000-0000-0000-000000000000",
+        name: "Guest",
+        settings: {
+          mode: "light",
+          navB: "#193441",
+          navF: "#dddddd",
+          menuB: "#3e606f",
+          menuF: "#cccccc",
+          menuL: "#91aa9d",
+          bodyB: "#fcfff5",
+          bodyL: "#2f657f"
+        },
+        locale: "en-US"
+      }
+    };
+  </script>
+</head>
+<body class="uk-dark body-b" data-uk-height-viewport="expand: true">
+<noscript>
+  <strong>npn requires JavaScript, please enable it to continue</strong>
+</noscript>
+<div id="npn"></div>
+<script src="/vendor/editor/editor.js"></script>
+<script type="module">
+  import "/src/main.ts";
+
+  window.init(true, true);
+</script>
+</body>
+</html>

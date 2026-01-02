@@ -1,4 +1,4 @@
-import {ref, watchEffect} from "@vue/composition-api";
+import {ref, watchEffect} from "vue";
 import {Basic} from "@/auth/basic";
 import {Auth} from "@/auth/model";
 import {jsonClone} from "@/util/json";

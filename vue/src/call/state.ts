@@ -5,7 +5,7 @@ import {activeSessionRef} from "@/session/state";
 import {requestService} from "@/util/services";
 import {clientCommands} from "@/util/command";
 import {requestEditingRef} from "@/request/state";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 import {logError} from "@/util/log";
 
 export const requestResultsRef = ref<RequestResults>({id: "", coll: "", req: "", cycles: []});

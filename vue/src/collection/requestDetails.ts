@@ -1,5 +1,5 @@
 import {NPNRequest, Summary} from "@/request/model";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 import {clearPendingRequests, pendingRequestsRef} from "@/socket/pending";
 import {setRequestDetail} from "@/request/state";
 import {globalRouter} from "@/util/vutils";

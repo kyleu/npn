@@ -1,7 +1,7 @@
 import {Collection, CollectionCount} from "@/collection/collection";
 import {Summary} from "@/request/model";
 import {socketRef} from "@/socket/socket";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 import {collectionService} from "@/util/services";
 import {clientCommands} from "@/util/command";
 import {pendingRequestsRef, setPendingRequests} from "@/socket/pending";

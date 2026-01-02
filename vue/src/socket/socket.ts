@@ -1,6 +1,6 @@
 import {jsonClone, jsonParse, jsonStr} from "@/util/json";
 import {isDebug, logDebug} from "@/util/log";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 
 export interface Message {
   readonly channel: string;

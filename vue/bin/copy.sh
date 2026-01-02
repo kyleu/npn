@@ -14,7 +14,6 @@ rm -f ../assets/vendor/*.js
 rm -f ../assets/vendor/*.css
 rm -f ../assets/vendor/*.map
 
-cp dist/js/app.*.js ../assets/vendor/npn.js
-cp dist/js/chunk*.*.js ../assets/vendor/vendor.js
-cp dist/js/*.map ../assets/vendor
-cp dist/css/app.*.css ../assets/vendor/npn.css
+cp dist/assets/index-*.js ../assets/vendor/npn.js
+cp dist/assets/index-*.css ../assets/vendor/npn.css
+cp dist/vendor/editor/editor.js ../assets/vendor/vendor.js

@@ -1,4 +1,4 @@
-import {ref, watchEffect} from "@vue/composition-api";
+import {ref, watchEffect} from "vue";
 import {jsonClone, jsonParseTry, jsonStr} from "@/util/json";
 import {FormConfig, HTMLConfig, JSONConfig, RBody, XMLConfig} from "@/body/model";
 import {requestEditingRef} from "@/request/state";

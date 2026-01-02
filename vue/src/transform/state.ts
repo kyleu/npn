@@ -1,6 +1,6 @@
 import {socketRef} from "@/socket/socket";
 import {CollectionTransformResult, RequestTransformResult, SessionTransformResult} from "@/transform/result";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 import {collectionService, requestService, sessionService} from "@/util/services";
 import {clientCommands} from "@/util/command";
 import {clearPendingRequests, pendingRequestsRef, setPendingRequests} from "@/socket/pending";

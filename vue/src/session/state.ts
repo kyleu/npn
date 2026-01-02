@@ -1,5 +1,5 @@
 import {socketRef} from "@/socket/socket";
-import {ref} from "@vue/composition-api";
+import {ref} from "vue";
 import {sessionService} from "@/util/services";
 import {clientCommands} from "@/util/command";
 import {clearPendingRequests, pendingRequestsRef, setPendingRequests} from "@/socket/pending";

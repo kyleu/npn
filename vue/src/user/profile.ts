@@ -1,11 +1,9 @@
-import {ref, watchEffect} from "@vue/composition-api";
+import {ref, watchEffect} from "vue";
 
 import Vue from "vue";
-import VueCompositionAPI from "@vue/composition-api";
 import VueRouter from "vue-router";
 import {Color} from "@/user/colors";
 
-Vue.use(VueCompositionAPI);
 Vue.use(VueRouter);
 
 export interface UserSettings {
