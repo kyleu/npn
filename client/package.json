@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "type": "module",
   "description": "It's basically Postman, but much smaller (8MB download) and faster. You can run npn as an HTTP server, or use a native desktop or mobile app.",
   "repository": {
