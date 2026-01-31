@@ -5,8 +5,8 @@ Source code is available at [GitHub](https://github.com/kyleu/npn).
 ## Setup
 
 ```
-git clone https://github.com/kyleu/projectforge
-cd projectforge
+git clone https://github.com/kyleu/npn
+cd npn
 ./bin/bootstrap.sh
 ```
 
@@ -14,7 +14,7 @@ cd projectforge
 
 ```
 make build
-./build/debug/projectforge --help
+./build/debug/npn --help
 ./bin/dev.sh
 ```
 
