@@ -11,11 +11,14 @@ const (
 	AppSource  = "https://github.com/kyleu/npn"
 	AppLegal   = `Built by <a href="mailto:npn@kyleu.com">Kyle U</a>, all rights reserved`
 
-	KeyDebug   = "debug"
-	KeyError   = "error"
-	KeyRandom  = "random"
-	KeyStart   = "start"
-	KeyUnknown = "unknown"
+	KeyOK       = "ok"
+	KeySuccess  = "success"
+	KeyError    = "error"
+	KeyDebug    = "debug"
+	KeyStart    = "start"
+	KeyRandom   = "random"
+	KeyUnknown  = "unknown"
+	KeyEllipsis = "…"
 
 	KeyCSV  = "csv"
 	KeyJSON = "json"
@@ -25,9 +28,6 @@ const (
 
 	ExtJSON     = ".json"
 	ExtMarkdown = ".md"
-
-	OK    = "ok"
-	Error = "error"
 	// $PF_SECTION_START(keys)$
 	// $PF_SECTION_END(keys)$.
 )
