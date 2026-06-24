@@ -17,4 +17,6 @@ WORKDIR /
 
 ENTRYPOINT ["/npn", "-a", "0.0.0.0"]
 
-COPY npn /
+ARG TARGETPLATFORM
+
+COPY $TARGETPLATFORM/npn /
